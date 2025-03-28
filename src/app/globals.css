@@ -1,8 +1,14 @@
 @import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
 }
 
 @theme inline {
@@ -16,6 +22,9 @@
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
   }
 }
 
@@ -23,4 +32,38 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Améliorer la visibilité des placeholders */
+::placeholder {
+  color: #6b7280 !important; /* gris plus foncé */
+  opacity: 1 !important;
+}
+
+:-ms-input-placeholder {
+  color: #6b7280 !important;
+  opacity: 1 !important;
+}
+
+::-ms-input-placeholder {
+  color: #6b7280 !important;
+  opacity: 1 !important;
+}
+
+/* Améliorer la visibilité des selects */
+select {
+  color: #374151 !important; /* gris très foncé */
+  font-weight: 500 !important;
+  appearance: auto !important;
+}
+
+select option {
+  color: #374151 !important;
+  background-color: white !important;
+  font-weight: 500 !important;
+}
+
+select option:first-child {
+  color: #6b7280 !important; /* gris plus foncé pour l'option vide */
+  font-weight: normal !important;
 }
