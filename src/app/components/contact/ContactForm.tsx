@@ -183,17 +183,13 @@ const ContactForm = () => {
               animate={errors.sujet ? "error" : ""}
               variants={inputVariants}
             >
-              <select
+              <input
                 id="sujet"
+                type="text"
+                placeholder="Écrivez ici"
                 className={errors.sujet ? inputErrorClasses : inputClasses}
                 {...register('sujet')}
-              >
-                <option value="">Sélectionnez un sujet</option>
-                <option value="devis">Demande de devis</option>
-                <option value="information">Demande d&apos;information</option>
-                <option value="apres-vente">Service après-vente</option>
-                <option value="autre">Autre</option>
-              </select>
+              />
             </motion.div>
             {errors.sujet && (
               <p className="mt-1 text-sm text-red-600">{errors.sujet.message}</p>
