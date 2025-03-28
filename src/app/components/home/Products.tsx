@@ -1,6 +1,7 @@
 "use client";
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import StaggerContainer from '../animations/StaggerContainer';
 import StaggerItem from '../animations/StaggerItem';
@@ -9,24 +10,24 @@ import FadeIn from '../animations/FadeIn';
 const productsData = [
   {
     id: 1,
-    name: 'Portails Battants',
-    description: 'Élégants et traditionnels, nos portails battants s\'adaptent à tous les styles d\'entrée.',
-    imageSrc: 'https://images.unsplash.com/photo-1573082011553-98b8235576d4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
-    link: '/nos-produits/portails-battants'
+    name: 'Portails',
+    description: 'Nos portails en aluminium sur mesure : pleins, barreaudés ou avec découpes laser, adaptés à tous les styles.',
+    imageSrc: '/Slide5.jpg',
+    link: '/realisations#portails-pleins'
   },
   {
     id: 2,
-    name: 'Portails Coulissants',
-    description: 'Pratiques et modernes, parfaits pour les espaces limités ou les terrains en pente.',
-    imageSrc: 'https://images.unsplash.com/photo-1593171840744-585f38c973a7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
-    link: '/nos-produits/portails-coulissants'
+    name: 'Autres Produits',
+    description: 'Notre savoir-faire s\'étend à une gamme variée : balcons, garde-corps, clôtures, défenses de fenêtres et jardinières.',
+    imageSrc: '/Slide21.jpg',
+    link: '/realisations#balcons-garde-corps'
   },
   {
     id: 3,
-    name: 'Motorisations',
-    description: 'Sécurité et confort avec nos solutions de motorisation adaptées à tous types de portails.',
-    imageSrc: 'https://images.unsplash.com/photo-1573489998265-b4535f551801?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80',
-    link: '/nos-produits/motorisations'
+    name: 'Motifs et Couleurs',
+    description: 'Personnalisez vos installations avec notre large choix de motifs laser et notre palette de couleurs variée.',
+    imageSrc: '/Slide30.jpg',
+    link: '/realisations#motifs-laser'
   }
 ];
 
@@ -46,7 +47,7 @@ const Products = () => {
         </FadeIn>
 
         <StaggerContainer staggerDelay={0.1}>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {productsData.map((product) => (
               <StaggerItem 
                 key={product.id} 
@@ -54,13 +55,13 @@ const Products = () => {
                 className="bg-gray-50 rounded-lg overflow-hidden shadow-lg transition-transform hover:scale-105"
               >
                 <div className="relative h-64">
-                  <div className="absolute inset-0">
-                    <img
-                      src={product.imageSrc}
-                      alt={product.name}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
+                  <Image
+                    src={product.imageSrc}
+                    alt={product.name}
+                    fill
+                    style={{ objectFit: 'cover' }}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 33vw"
+                  />
                 </div>
                 <div className="p-6">
                   <h3 className="text-xl font-semibold text-gray-900 mb-2">{product.name}</h3>
@@ -89,10 +90,10 @@ const Products = () => {
               whileTap={{ scale: 0.95 }}
             >
               <Link 
-                href="/nos-produits" 
+                href="/realisations" 
                 className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 md:text-lg"
               >
-                Voir tous nos produits
+                Voir toutes nos réalisations
                 <svg className="ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                   <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
                 </svg>
