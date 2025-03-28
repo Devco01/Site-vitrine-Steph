@@ -1,36 +1,84 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Site Vitrine - Stéphane Bernard Portails
 
-## Getting Started
+Site vitrine professionnel pour Stéphane Bernard, spécialiste en portails sur mesure, développé avec Next.js, TypeScript et Tailwind CSS.
 
-First, run the development server:
+## Technologies utilisées
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Next.js 14** - Framework React avec App Router
+- **TypeScript** - Typage statique
+- **Tailwind CSS** - Framework CSS utilitaire
+- **Framer Motion** - Bibliothèque d'animations fluides
+- **React Hook Form** - Gestion des formulaires
+
+## Fonctionnalités
+
+- Design responsive adapté à tous les appareils
+- Animations fluides avec Framer Motion
+- Formulaire de contact avec validation
+- Optimisation SEO avec les métadonnées Next.js
+- Performance optimisée (Core Web Vitals)
+
+## Structure du projet
+
+```
+src/
+  ├── app/                   # Dossier principal de l'application
+  │   ├── components/        # Composants réutilisables
+  │   │   ├── animations/    # Composants d'animation
+  │   │   ├── contact/       # Composants de la page contact
+  │   │   ├── home/          # Composants de la page d'accueil
+  │   │   └── layout/        # Composants de structure (Header, Footer, etc.)
+  │   ├── contact/           # Page de contact
+  │   ├── globals.css        # Styles globaux
+  │   ├── layout.tsx         # Layout principal
+  │   └── page.tsx           # Page d'accueil
+  ├── public/                # Fichiers statiques (images, etc.)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Installation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Cloner le dépôt
+   ```bash
+   git clone https://github.com/votre-username/portails-stephane-bernard.git
+   cd portails-stephane-bernard
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2. Installer les dépendances
+   ```bash
+   npm install
+   # ou
+   yarn install
+   ```
 
-## Learn More
+3. Lancer le serveur de développement
+   ```bash
+   npm run dev
+   # ou
+   yarn dev
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+4. Ouvrir [http://localhost:3000](http://localhost:3000) dans votre navigateur
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Déploiement
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Le site peut être déployé facilement sur Vercel :
 
-## Deploy on Vercel
+```bash
+npm run build
+# ou
+yarn build
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Pour un déploiement en production, suivez les [instructions de déploiement Next.js](https://nextjs.org/docs/app/building-your-application/deploying).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Environnement de développement recommandé
+
+- Node.js 18+
+- Visual Studio Code avec les extensions suivantes :
+  - ESLint
+  - Prettier
+  - Tailwind CSS IntelliSense
+
+## Licence
+
+Ce projet est sous licence privée. Tous droits réservés à Stéphane Bernard.
