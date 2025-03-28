@@ -12,25 +12,29 @@ const Footer = () => {
           <div>
             <h3 className="text-xl font-semibold mb-4">Stéphane Bernard</h3>
             <p className="mb-2">Spécialiste en portails sur mesure</p>
-            <p className="mb-2">123 rue des Artisans</p>
-            <p className="mb-2">75000 Paris</p>
-            <p>SIRET : 123 456 789 00012</p>
+            <p className="mb-2">Installation et réparation de portails</p>
+            <p className="mb-2">Région Charente-Maritime</p>
+            <p>Entreprise Individuelle - SIRET : 49982603000037</p>
           </div>
 
           <div>
             <h3 className="text-xl font-semibold mb-4">Contact</h3>
             <p className="mb-2">
-              <span className="font-semibold">Téléphone :</span> 01 23 45 67 89
+              <span className="font-semibold">Téléphone :</span> 06.64.95.30.92
+            </p>
+            <p className="mb-2">
+              <span className="font-semibold">Adresse :</span> 58 rue des sauniers, 17530 Arvert
             </p>
             <p className="mb-4">
-              <span className="font-semibold">Email :</span> contact@stephane-bernard-portails.fr
+              <span className="font-semibold">Email :</span> bernard.s.portails@gmail.com
             </p>
             <div className="flex space-x-4">
               <a 
-                href="https://facebook.com" 
+                href="https://www.facebook.com/p/Entreprise-Bernard-St%C3%A9phane-100062329458219/" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-gray-300 hover:text-white transition-colors duration-200"
+                aria-label="Page Facebook de Stéphane Bernard Portails"
               >
                 <span className="sr-only">Facebook</span>
                 <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -67,11 +71,6 @@ const Footer = () => {
               </Link>
             </div>
           </div>
-          <p className="mt-4 text-sm text-gray-400">
-            Conformément au Règlement Général sur la Protection des Données (RGPD), 
-            vous disposez d&apos;un droit d&apos;accès, de rectification et de suppression de vos données personnelles. 
-            Pour exercer ces droits, veuillez nous contacter par email.
-          </p>
         </div>
       </div>
     </footer>
