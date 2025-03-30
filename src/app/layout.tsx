@@ -13,8 +13,21 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Stéphane Bernard - Portails sur mesure",
-  description: "Spécialiste en conception et installation de portails sur mesure. Des solutions élégantes, durables et personnalisées pour sublimer votre entrée.",
+  title: "Portails sur mesure Arvert - Stéphane Bernard | 17530 Charente-Maritime",
+  description: "Entreprise spécialisée dans les portails sur mesure à Arvert (17530). Installation, réparation et dépannage de portails aluminium en Charente-Maritime. Devis gratuit.",
+  keywords: "portails, portails sur mesure, portails Arvert, entreprise portails Arvert, portails aluminium, Charente-Maritime, 17530, Stéphane Bernard, installation portail, réparation portail",
+  robots: "index, follow",
+  alternates: {
+    canonical: "https://stephane-bernard-portails.fr/",
+  },
+  openGraph: {
+    title: "Portails sur mesure Arvert - Stéphane Bernard | 17530",
+    description: "Entreprise spécialisée dans les portails sur mesure à Arvert (17530). Installation, réparation et dépannage de portails aluminium en Charente-Maritime.",
+    url: "https://stephane-bernard-portails.fr/",
+    siteName: "Stéphane Bernard Portails",
+    locale: "fr_FR",
+    type: "website",
+  },
   icons: {
     icon: '/favicon.ico',
   },

@@ -6,9 +6,50 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-gray-800 text-white pt-10 pb-6">
+    <footer className="bg-gray-900 text-white py-12">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+        {/* Schema.org LocalBusiness markup */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "LocalBusiness",
+              "name": "Stéphane Bernard - Portails sur mesure",
+              "image": "https://stephane-bernard-portails.fr/Logo.png",
+              "url": "https://stephane-bernard-portails.fr",
+              "telephone": "06.64.95.30.92",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "58 rue des sauniers",
+                "addressLocality": "Arvert",
+                "postalCode": "17530",
+                "addressCountry": "FR"
+              },
+              "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": "45.7348",
+                "longitude": "-1.1688"
+              },
+              "openingHoursSpecification": {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": [
+                  "Monday",
+                  "Tuesday",
+                  "Wednesday",
+                  "Thursday",
+                  "Friday"
+                ],
+                "opens": "08:00",
+                "closes": "18:00"
+              },
+              "priceRange": "€€",
+              "servesCuisine": "Portails sur mesure, Portails aluminium",
+              "description": "Entreprise spécialisée dans les portails sur mesure à Arvert (17530). Installation, réparation et dépannage de portails aluminium en Charente-Maritime."
+            })
+          }}
+        />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           <div>
             <h3 className="text-xl font-semibold mb-4">Stéphane Bernard</h3>
             <p className="mb-2">Spécialiste en portails sur mesure</p>

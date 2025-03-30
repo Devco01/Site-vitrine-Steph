@@ -1,0 +1,14 @@
+# Robots.txt pour Stéphane Bernard Portails
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://stephane-bernard-portails.fr/sitemap.xml
+
+# Les pages importantes
+Allow: /
+Allow: /contact
+Allow: /realisations
+Allow: /mentions-legales
+Allow: /politique-de-confidentialite
+Allow: /cgv 
