@@ -15,7 +15,7 @@ export default function Home() {
     <PageWrapper>
       <div className="flex justify-center items-center py-8 bg-gray-50">
         <div className="text-center">
-          <div className="relative w-[400px] h-[400px] mx-auto mb-6">
+          <div className="relative w-[500px] h-[500px] mx-auto mb-6">
             <Image 
               src="/Logo.png" 
               alt="Stéphane Bernard Portails - Entreprise de portails à Arvert" 
