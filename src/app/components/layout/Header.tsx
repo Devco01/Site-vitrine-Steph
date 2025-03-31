@@ -38,7 +38,7 @@ const Header = () => {
 
   return (
     <header className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? 'bg-gradient-to-r from-blue-700 to-blue-600 shadow-md py-2' : 'bg-gradient-to-r from-blue-800 to-blue-600 py-3'}`}>
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-2 sm:px-4">
         <div className="flex justify-between items-center">
           <motion.div 
             className="flex items-center"
@@ -47,19 +47,20 @@ const Header = () => {
             transition={{ duration: 0.5 }}
           >
             <Link href="/" className="flex items-center group">
-              <div className="relative w-14 h-14 mr-3 transition-transform duration-300 group-hover:scale-105">
+              <div className="relative w-8 h-8 xs:w-10 xs:h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 mr-1 xs:mr-2 sm:mr-3 transition-transform duration-300 group-hover:scale-105 flex-shrink-0">
                 <Image 
                   src="/Logo.png" 
                   alt="Logo Bernard Stéphane Portails" 
                   fill
                   style={{ objectFit: 'contain' }}
                   className="transition-opacity duration-300"
-                  sizes="56px"
+                  sizes="(max-width: 400px) 32px, (max-width: 640px) 40px, (max-width: 768px) 48px, 56px"
+                  priority
                 />
               </div>
-              <div>
-                <span className="text-xl font-bold text-white">Stéphane Bernard</span>
-                <span className="block text-sm text-blue-100">Portails sur mesure</span>
+              <div className="leading-tight">
+                <span className="text-xs xs:text-sm sm:text-base md:text-xl font-bold text-white truncate max-w-[140px] xs:max-w-[180px] sm:max-w-none">Stéphane Bernard</span>
+                <span className="block text-xxs xs:text-xs sm:text-sm text-blue-100 truncate max-w-[140px] xs:max-w-[180px] sm:max-w-none">Portails sur mesure</span>
               </div>
             </Link>
           </motion.div>
@@ -105,7 +106,7 @@ const Header = () => {
             whileTap={{ scale: 0.95 }}
           >
             <svg
-              className="w-6 h-6"
+              className="w-5 h-5 sm:w-6 sm:h-6"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"

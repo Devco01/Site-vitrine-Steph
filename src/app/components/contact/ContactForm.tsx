@@ -51,12 +51,18 @@ const ContactForm = () => {
     setSubmitError('');
 
     try {
-      // Simuler un délai d'envoi
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-      
-      // Ici, vous implémenteriez l'envoi réel du formulaire à votre backend ou service d'email
-      console.log('Données du formulaire :', data);
-      
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        throw new Error('Erreur lors de l\'envoi du formulaire');
+      }
+
       setSubmitSuccess(true);
       reset();
       
@@ -65,8 +71,8 @@ const ContactForm = () => {
         setSubmitSuccess(false);
       }, 5000);
     } catch (error) {
-      setSubmitError('Une erreur est survenue lors de l&apos;envoi du formulaire. Veuillez réessayer.');
-      console.error('Erreur d&apos;envoi du formulaire :', error);
+      setSubmitError('Une erreur est survenue lors de l\'envoi du formulaire. Veuillez réessayer.');
+      console.error('Erreur d\'envoi du formulaire :', error);
     } finally {
       setIsSubmitting(false);
     }

@@ -49,17 +49,17 @@ const Footer = () => {
             })
           }}
         />
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
-          <div>
-            <h3 className="text-xl font-semibold mb-4">Stéphane Bernard</h3>
+        <div className="flex flex-col md:flex-row justify-center items-center gap-8 mb-8">
+          <div className="text-center max-w-sm">
+            <h3 className="text-xl font-semibold mb-4 border-b border-gray-700 pb-2 inline-block">Stéphane Bernard</h3>
             <p className="mb-2">Spécialiste en portails sur mesure</p>
             <p className="mb-2">Installation et réparation de portails</p>
             <p className="mb-2">Région Charente-Maritime</p>
             <p>Entreprise Individuelle - SIRET : 49982603000037</p>
           </div>
 
-          <div>
-            <h3 className="text-xl font-semibold mb-4">Contact</h3>
+          <div className="text-center max-w-sm">
+            <h3 className="text-xl font-semibold mb-4 border-b border-gray-700 pb-2 inline-block">Contact</h3>
             <p className="mb-2">
               <span className="font-semibold">Téléphone :</span> 06.64.95.30.92
             </p>
@@ -69,7 +69,7 @@ const Footer = () => {
             <p className="mb-4">
               <span className="font-semibold">Email :</span> bernard.s.portails@gmail.com
             </p>
-            <div className="flex space-x-4">
+            <div className="flex justify-center space-x-4">
               <a 
                 href="https://www.facebook.com/p/Entreprise-Bernard-St%C3%A9phane-100062329458219/" 
                 target="_blank" 
@@ -87,11 +87,11 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-gray-700 pt-6">
-          <div className="flex flex-col md:flex-row md:justify-between">
-            <p className="mb-4 md:mb-0">
+          <div className="flex flex-col items-center gap-4">
+            <p className="text-center">
               © {currentYear} Stéphane Bernard Portails. Tous droits réservés.
             </p>
-            <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-6">
+            <div className="flex flex-wrap justify-center gap-4">
               <Link 
                 href="/mentions-legales" 
                 className="text-gray-300 hover:text-white transition-colors duration-200"

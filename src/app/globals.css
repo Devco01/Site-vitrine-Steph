@@ -21,11 +21,9 @@
 /* Désactiver complètement le mode sombre pour éviter le fond noir */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #ffffff;
-    --foreground: #171717;
-    --foreground-rgb: 0, 0, 0;
-    --background-start-rgb: 214, 219, 220;
-    --background-end-rgb: 255, 255, 255;
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
   }
 }
 
@@ -33,6 +31,9 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
 }
 
 /* Améliorer la visibilité des placeholders */
@@ -67,4 +68,122 @@ select option {
 select option:first-child {
   color: #6b7280 !important; /* gris plus foncé pour l'option vide */
   font-weight: normal !important;
+}
+
+/* Style pour masquer la barre de défilement horizontale sur les éléments avec scrollbar-hide */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Conteneurs pour limiter la largeur maximale sur petits écrans */
+.container {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Styles responsifs */
+@media (max-width: 640px) {
+  /* Ajustements pour les très petits écrans */
+  h1, h2, h3 {
+    word-wrap: break-word;
+    hyphens: auto;
+    max-width: 100%;
+  }
+  
+  /* Éviter que les boutons dépassent */
+  .overflow-hidden-mobile {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  /* Ajustement des marges */
+  .container {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+  
+  /* Limiter la largeur des textes */
+  span, p {
+    max-width: 100%;
+    overflow-wrap: break-word;
+  }
+  
+  /* Réduire le padding sur les éléments conteneurs */
+  .px-4 {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+}
+
+@media (max-width: 400px) {
+  /* Ajustements pour les très petits mobiles */
+  .container {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+  
+  /* Réduire encore plus les tailles de texte */
+  h1 {
+    font-size: 1.25rem;
+  }
+  
+  h2 {
+    font-size: 1.1rem;
+  }
+  
+  p {
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 768px) {
+  /* S'assurer que les images responsives ne dépassent pas */
+  img {
+    max-width: 100%;
+  }
+  
+  /* Améliorer la lisibilité des textes sur mobiles */
+  p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+  
+  /* Limiter la largeur du contenu pour éviter les débordements */
+  div, section {
+    max-width: 100%;
+  }
+}
+
+/* Pour assurer que le contenu des boutons reste dans le bouton sur tous les écrans */
+button, 
+a[href], 
+.btn {
+  white-space: normal;
+  word-wrap: break-word;
+  max-width: 100%;
+}
+
+/* Correction spécifique pour le header */
+header {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+/* Assurer que les titres ne débordent pas dans le Hero */
+.text-xl, .text-2xl, .text-3xl, .text-4xl, .text-5xl, .text-6xl {
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+/* Empêcher le débordement horizontal pour tous les éléments */
+* {
+  max-width: 100vw;
 }

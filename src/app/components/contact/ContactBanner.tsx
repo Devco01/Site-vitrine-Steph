@@ -3,6 +3,14 @@
 import { motion } from 'framer-motion';
 
 const ContactBanner = () => {
+  const scrollToContact = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+      contactForm.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section className="relative bg-gradient-to-r from-blue-600 to-blue-500 py-16 md:py-24 overflow-hidden">
       {/* Éléments décoratifs */}
@@ -45,6 +53,7 @@ const ContactBanner = () => {
           >
             <a 
               href="#contactForm"
+              onClick={scrollToContact}
               className="inline-flex items-center justify-center px-6 py-3 bg-white text-blue-600 font-medium rounded-md shadow-md hover:bg-blue-50 transition-colors duration-300"
             >
               Nous contacter

@@ -24,7 +24,7 @@ export default function ContactPage() {
         
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">
-            <div className="bg-gradient-to-b from-white to-blue-50 rounded-lg shadow-md p-6 md:p-8">
+            <div id="contactForm" className="bg-gradient-to-b from-white to-blue-50 rounded-lg shadow-md p-6 md:p-8">
               <h2 className="text-2xl font-bold text-blue-800 mb-4 pb-2 border-b border-blue-100">Contactez-nous</h2>
               <p className="text-gray-700 mb-6">
                 Besoin d&apos;informations sur nos services ou envie de discuter de votre projet ? 
