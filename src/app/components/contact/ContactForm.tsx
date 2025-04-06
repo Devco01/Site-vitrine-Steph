@@ -7,8 +7,8 @@ import emailjs from '@emailjs/browser';
 
 // Type pour les données du formulaire
 interface FormData {
-  nom: string;
-  email: string;
+  from_name: string;
+  reply_to: string;
   telephone: string;
   sujet: string;
   message: string;
@@ -16,8 +16,8 @@ interface FormData {
 
 // Type pour les erreurs du formulaire
 interface FormErrors {
-  nom?: string;
-  email?: string;
+  from_name?: string;
+  reply_to?: string;
   message?: string;
 }
 
@@ -27,8 +27,8 @@ export default function ContactForm() {
   
   // États pour le formulaire
   const [formData, setFormData] = useState<FormData>({
-    nom: '',
-    email: '',
+    from_name: '',
+    reply_to: '',
     telephone: '',
     sujet: 'Demande de devis',
     message: '',
@@ -55,14 +55,14 @@ export default function ContactForm() {
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
     
-    if (!formData.nom.trim()) {
-      newErrors.nom = 'Veuillez entrer votre nom';
+    if (!formData.from_name.trim()) {
+      newErrors.from_name = 'Veuillez entrer votre nom';
     }
     
-    if (!formData.email.trim()) {
-      newErrors.email = 'Veuillez entrer votre email';
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Veuillez entrer un email valide';
+    if (!formData.reply_to.trim()) {
+      newErrors.reply_to = 'Veuillez entrer votre email';
+    } else if (!/\S+@\S+\.\S+/.test(formData.reply_to)) {
+      newErrors.reply_to = 'Veuillez entrer un email valide';
     }
     
     if (!formData.message.trim()) {
@@ -106,8 +106,8 @@ export default function ContactForm() {
         
         // Préparation des paramètres du template
         const templateParams = {
-          from_name: formData.nom,
-          reply_to: formData.email,
+          from_name: formData.from_name,
+          reply_to: formData.reply_to,
           telephone: formData.telephone || 'Non fourni',
           sujet: formData.sujet || 'Sans sujet',
           message: formData.message,
@@ -137,8 +137,8 @@ export default function ContactForm() {
       
       // Réinitialiser le formulaire après succès
       setFormData({
-        nom: '',
-        email: '',
+        from_name: '',
+        reply_to: '',
         telephone: '',
         sujet: 'Demande de devis',
         message: '',
@@ -196,14 +196,14 @@ export default function ContactForm() {
                 type="text"
                 id="from_name"
                 name="from_name"
-                value={formData.nom}
+                value={formData.from_name}
                 onChange={handleChange}
                 className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                  errors.nom ? 'border-red-500' : 'border-gray-300'
+                  errors.from_name ? 'border-red-500' : 'border-gray-300'
                 }`}
                 placeholder="Votre nom"
               />
-              {errors.nom && <p className="mt-1 text-red-500 text-sm">{errors.nom}</p>}
+              {errors.from_name && <p className="mt-1 text-red-500 text-sm">{errors.from_name}</p>}
             </div>
             
             <div>
@@ -214,14 +214,14 @@ export default function ContactForm() {
                 type="email"
                 id="reply_to"
                 name="reply_to"
-                value={formData.email}
+                value={formData.reply_to}
                 onChange={handleChange}
                 className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                  errors.email ? 'border-red-500' : 'border-gray-300'
+                  errors.reply_to ? 'border-red-500' : 'border-gray-300'
                 }`}
                 placeholder="Votre email"
               />
-              {errors.email && <p className="mt-1 text-red-500 text-sm">{errors.email}</p>}
+              {errors.reply_to && <p className="mt-1 text-red-500 text-sm">{errors.reply_to}</p>}
             </div>
           </div>
           
