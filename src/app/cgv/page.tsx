@@ -45,14 +45,7 @@ export default function CGVPage() {
                       </div>
                     </li>
                     <li className="px-4 py-3 flex items-start">
-                      <span className="mr-3 flex-shrink-0 inline-flex items-center justify-center h-6 w-6 rounded-full bg-blue-100 text-blue-800">60%</span>
-                      <div>
-                        <p className="font-medium">Au début des travaux d&apos;installation</p>
-                        <p className="text-sm text-gray-600">Second versement</p>
-                      </div>
-                    </li>
-                    <li className="px-4 py-3 flex items-start">
-                      <span className="mr-3 flex-shrink-0 inline-flex items-center justify-center h-6 w-6 rounded-full bg-blue-100 text-blue-800">10%</span>
+                      <span className="mr-3 flex-shrink-0 inline-flex items-center justify-center h-6 w-6 rounded-full bg-blue-100 text-blue-800">70%</span>
                       <div>
                         <p className="font-medium">À la fin des travaux et réception du chantier</p>
                         <p className="text-sm text-gray-600">Solde final</p>
