@@ -1,4 +1,8 @@
 import { NextResponse } from 'next/server';
+import emailjs from '@emailjs/browser';
+
+// Ajoutez cette ligne après les imports
+emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || '');
 
 // Fonction utilitaire pour envoyer une réponse d'erreur
 function sendErrorResponse(message: string, status: number = 500) {
@@ -82,7 +86,7 @@ export async function POST(request: Request) {
         body: JSON.stringify({
           service_id: serviceId,
           template_id: templateId,
-          user_id: publicKey,
+          publicKey: publicKey,
           template_params: templateParams,
         }),
       });
