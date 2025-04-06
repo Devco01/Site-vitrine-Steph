@@ -3,7 +3,6 @@
 import { useState, FormEvent } from 'react';
 import { motion } from 'framer-motion';
 import { fadeIn } from '@/utils/motionVariants';
-import emailjs from '@emailjs/browser';
 
 // Type pour les données du formulaire
 interface FormData {
@@ -83,32 +82,19 @@ export default function ContactForm() {
     setSubmitStatus({});
     
     try {
-      // Configuration d'EmailJS
-      const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || 'service_default';
-      const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || 'template_default';
-      const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || '';
+      // Envoi du formulaire via notre API serveur
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
       
-      // Préparation des paramètres du template
-      const templateParams = {
-        from_name: formData.nom,
-        reply_to: formData.email,
-        telephone: formData.telephone || 'Non fourni',
-        sujet: formData.sujet,
-        message: formData.message,
-      };
-      
-      // Vérifier si nous sommes en environnement de développement
-      const isDevelopment = typeof window !== 'undefined' && 
-        (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
-      
-      if (isDevelopment) {
-        // En développement, simuler l'envoi d'email pour éviter les problèmes de CSP
-        console.log('Mode développement : simulation d\'envoi d\'email avec ces paramètres :', templateParams);
-        // Attendre un délai artificiel pour simuler l'envoi
-        await new Promise(resolve => setTimeout(resolve, 1000));
-      } else {
-        // En production, envoyer réellement l'email
-        await emailjs.send(serviceId, templateId, templateParams, publicKey);
+      if (!response.ok) {
+        throw new Error(data.message || 'Erreur lors de l\'envoi du message');
       }
       
       // Réinitialiser le formulaire après succès
