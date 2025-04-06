@@ -16,10 +16,10 @@ export function middleware(request: NextRequest) {
   securityHeaders.set('Referrer-Policy', 'strict-origin-when-cross-origin');
   securityHeaders.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
   
-  // Content Security Policy - à ajuster selon les besoins
+  // Content Security Policy - mise à jour pour autoriser Google Maps et EmailJS
   securityHeaders.set(
     'Content-Security-Policy',
-    "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://vercel.live; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self' https://vercel.live; frame-src 'self';"
+    "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://vercel.live; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://*.googleapis.com https://*.gstatic.com https://vercel.com https://images.unsplash.com; font-src 'self'; connect-src 'self' https://vercel.live https://api.emailjs.com; frame-src 'self' https://www.google.com;"
   );
 
   // Empêche les accès directs aux routes d'API
