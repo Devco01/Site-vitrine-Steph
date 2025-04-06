@@ -82,6 +82,8 @@ export default function ContactForm() {
     setSubmitStatus({});
     
     try {
+      console.log('Envoi du formulaire - données:', formData);
+      
       // Envoi du formulaire via notre API serveur
       const response = await fetch('/api/send-email', {
         method: 'POST',
@@ -91,16 +93,31 @@ export default function ContactForm() {
         body: JSON.stringify(formData),
       });
 
+      console.log('Réponse reçue:', { 
+        status: response.status, 
+        statusText: response.statusText,
+        ok: response.ok 
+      });
+
       // Récupérer le texte brut de la réponse
       const responseText = await response.text();
+      console.log('Réponse texte:', responseText);
+      
+      // Vérification de la réponse vide
+      if (!responseText || responseText.trim() === '') {
+        console.error('Réponse vide reçue du serveur');
+        throw new Error('Aucune réponse reçue du serveur. Veuillez réessayer plus tard.');
+      }
       
       // Essayer de parser le JSON, s'il est valide
       let data;
       try {
         data = JSON.parse(responseText);
-      } catch {
+        console.log('Données JSON analysées:', data);
+      } catch (parseError) {
+        console.error('Erreur de parsing JSON:', parseError);
         console.error('Réponse non-JSON reçue:', responseText);
-        throw new Error('Format de réponse invalide');
+        throw new Error('Format de réponse invalide. Veuillez contacter l\'administrateur.');
       }
       
       if (!response.ok) {
