@@ -91,10 +91,21 @@ export default function ContactForm() {
         body: JSON.stringify(formData),
       });
 
-      const data = await response.json();
+      // Récupérer le texte brut de la réponse
+      const responseText = await response.text();
+      
+      // Essayer de parser le JSON, s'il est valide
+      let data;
+      try {
+        data = JSON.parse(responseText);
+      } catch {
+        console.error('Réponse non-JSON reçue:', responseText);
+        throw new Error('Format de réponse invalide');
+      }
       
       if (!response.ok) {
-        throw new Error(data.message || 'Erreur lors de l\'envoi du message');
+        console.error('Erreur de réponse API:', data);
+        throw new Error(data?.message || 'Erreur lors de l\'envoi du message');
       }
       
       // Réinitialiser le formulaire après succès
@@ -114,7 +125,9 @@ export default function ContactForm() {
       console.error('Erreur lors de l\'envoi du message:', error);
       setSubmitStatus({
         success: false,
-        message: 'Une erreur est survenue lors de l\'envoi du message. Veuillez réessayer ultérieurement.',
+        message: typeof error === 'object' && error !== null && 'message' in error 
+          ? (error as Error).message 
+          : 'Une erreur est survenue lors de l\'envoi du message. Veuillez réessayer ultérieurement.',
       });
     } finally {
       setIsSubmitting(false);
