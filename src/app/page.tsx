@@ -13,9 +13,23 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <PageWrapper>
-      <div className="flex justify-center items-center py-8 bg-gray-50">
-        <div className="text-center">
-          <div className="relative w-[500px] h-[500px] mx-auto mb-6">
+      <div className="relative h-[650px] sm:h-[700px] md:h-[750px] flex justify-center items-center overflow-hidden bg-gray-50">
+        {/* Image héro en arrière-plan */}
+        <div className="absolute inset-0 z-0">
+          <Image 
+            src="/Hero.jpg" 
+            alt="Portail aluminium sur mesure" 
+            fill
+            style={{ objectFit: 'cover', objectPosition: 'center' }}
+            className="opacity-100"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-gray-900/40 via-transparent to-transparent"></div>
+        </div>
+        
+        {/* Contenu superposé */}
+        <div className="relative z-10 text-center px-4">
+          <div className="relative w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] md:w-[500px] md:h-[500px] mx-auto mb-6">
             <Image 
               src="/Logo.png" 
               alt="Stéphane Bernard Portails - Entreprise de portails à Arvert" 
@@ -24,10 +38,10 @@ export default function Home() {
               priority
             />
           </div>
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+          <h1 className="text-3xl md:text-4xl font-bold text-white mb-4 text-shadow">
             Stéphane Bernard - Portails sur mesure à Arvert
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-white max-w-2xl mx-auto text-shadow">
             Fabrication et installation de portails aluminium de qualité dans toute la Charente-Maritime depuis Arvert (17530)
           </p>
         </div>

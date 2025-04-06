@@ -16,7 +16,7 @@ const categories = [
     subcategories: [
       { id: 'portails-pleins', name: 'Portails Pleins', slides: [3, 4, 5, 7, 8, 9, 10] },
       { id: 'portails-barreaudes', name: 'Portails Barreaudés', slides: [12, 13, 14, 15] },
-      { id: 'decoupes-laser', name: 'Découpes Laser', slides: [17, 18] }
+      { id: 'decoupes-laser', name: 'Découpes Laser', slides: [17, 18, 'Hero'] }
     ]
   },
   { 
@@ -114,8 +114,14 @@ const RealisationsBanner = () => {
 };
 
 // Composant pour l'image d'une réalisation
-const RealisationImage = ({ slide, category }: { slide: number, category: string }) => {
+const RealisationImage = ({ slide, category }: { slide: number | string, category: string }) => {
   const [modalOpen, setModalOpen] = useState(false);
+  
+  // Pour gérer le cas spécial de l'image Hero
+  const imageSrc = typeof slide === 'string' ? `/${slide}.jpg` : `/Slide${slide}.jpg`;
+  const imageAlt = typeof slide === 'string' 
+    ? `${category} - Portail avec découpe laser` 
+    : `${category} - Réalisation ${slide}`;
   
   return (
     <>
@@ -124,8 +130,8 @@ const RealisationImage = ({ slide, category }: { slide: number, category: string
         onClick={() => setModalOpen(true)}
       >
         <Image
-          src={`/Slide${slide}.jpg`}
-          alt={`${category} - Réalisation ${slide}`}
+          src={imageSrc}
+          alt={imageAlt}
           fill
           className="object-cover transition-transform duration-500 group-hover:scale-105"
           sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
@@ -147,8 +153,8 @@ const RealisationImage = ({ slide, category }: { slide: number, category: string
       <ImageModal 
         isOpen={modalOpen} 
         onClose={() => setModalOpen(false)} 
-        src={`/Slide${slide}.jpg`} 
-        alt={`${category} - Réalisation ${slide}`} 
+        src={imageSrc} 
+        alt={imageAlt} 
       />
     </>
   );
@@ -353,4 +359,4 @@ export default function Realisations() {
       ))}
     </PageWrapper>
   );
-} 
+}
