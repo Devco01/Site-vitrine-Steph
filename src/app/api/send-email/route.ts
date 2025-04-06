@@ -1,35 +1,44 @@
 import { NextResponse } from 'next/server';
 
+// Fonction utilitaire pour envoyer une réponse d'erreur
+function sendErrorResponse(message: string, status: number = 500) {
+  console.error(`Erreur API: ${message}`);
+  return NextResponse.json(
+    { message, success: false },
+    { status }
+  );
+}
+
 export async function POST(request: Request) {
+  // Entourer toute la logique dans un try-catch global
   try {
+    console.log('API: Début de traitement de la requête');
+    
     // Vérifier que le corps de la requête existe
     if (!request.body) {
-      return NextResponse.json(
-        { message: 'Corps de la requête vide', success: false },
-        { status: 400 }
-      );
+      return sendErrorResponse('Corps de la requête vide', 400);
     }
 
     // Analyser le corps de la requête avec gestion d'erreur
     let body;
     try {
       body = await request.json();
+      console.log('API: Corps de la requête analysé avec succès');
     } catch (error) {
       console.error('Erreur lors de l\'analyse du JSON:', error);
-      return NextResponse.json(
-        { message: 'Format de requête invalide', success: false },
-        { status: 400 }
-      );
+      return sendErrorResponse('Format de requête invalide', 400);
+    }
+
+    // Vérifier que le corps contient bien toutes les propriétés attendues
+    if (!body || typeof body !== 'object') {
+      return sendErrorResponse('Corps de la requête invalide', 400);
     }
 
     const { nom, email, telephone, sujet, message } = body;
 
     // Validation de base
     if (!nom || !email || !message) {
-      return NextResponse.json(
-        { message: 'Les champs nom, email et message sont obligatoires', success: false },
-        { status: 400 }
-      );
+      return sendErrorResponse('Les champs nom, email et message sont obligatoires', 400);
     }
 
     // Configuration d'EmailJS
@@ -39,11 +48,12 @@ export async function POST(request: Request) {
     
     // Vérifier que les configurations sont présentes
     if (!serviceId || !templateId || !publicKey) {
-      console.error('Configuration EmailJS manquante:', { serviceId, templateId, publicKey });
-      return NextResponse.json(
-        { message: 'Erreur de configuration du serveur d\'email', success: false },
-        { status: 500 }
-      );
+      console.error('Configuration EmailJS manquante:', { 
+        serviceId: serviceId ? 'défini' : 'non défini', 
+        templateId: templateId ? 'défini' : 'non défini', 
+        publicKey: publicKey ? 'défini' : 'non défini' 
+      });
+      return sendErrorResponse('Erreur de configuration du serveur d\'email', 500);
     }
     
     // Préparation des paramètres du template
@@ -56,7 +66,11 @@ export async function POST(request: Request) {
     };
     
     // Log pour le débogage
-    console.log('Tentative d\'envoi d\'email avec:', { serviceId, templateId, publicKey: '***' });
+    console.log('API: Tentative d\'envoi d\'email avec les paramètres', { 
+      serviceId, 
+      templateId, 
+      hasPublicKey: !!publicKey 
+    });
     
     try {
       // Appel à l'API EmailJS depuis le serveur
@@ -73,6 +87,11 @@ export async function POST(request: Request) {
         }),
       });
 
+      console.log('API: Réponse EmailJS reçue', { 
+        status: response.status, 
+        statusText: response.statusText 
+      });
+
       // Vérifier le statut de la réponse
       if (!response.ok) {
         // Tenter de lire le corps de la réponse pour plus de détails
@@ -86,9 +105,10 @@ export async function POST(request: Request) {
         }
         
         console.error('Erreur API EmailJS:', errorDetail);
-        throw new Error(`Erreur lors de l'envoi de l'email: ${errorDetail}`);
+        return sendErrorResponse(`Erreur lors de l'envoi de l'email: ${errorDetail}`);
       }
       
+      console.log('API: Email envoyé avec succès');
       return NextResponse.json(
         { 
           message: 'Message envoyé avec succès',
@@ -98,13 +118,11 @@ export async function POST(request: Request) {
       );
     } catch (apiError) {
       console.error('Erreur lors de l\'appel à l\'API EmailJS:', apiError);
-      throw apiError; // propager l'erreur pour la gestion globale
+      return sendErrorResponse(`Erreur lors de l'appel à l'API EmailJS: ${apiError instanceof Error ? apiError.message : 'Erreur inconnue'}`);
     }
   } catch (error) {
-    console.error('Erreur lors du traitement de la requête:', error);
-    return NextResponse.json(
-      { message: 'Erreur lors du traitement de la requête', success: false },
-      { status: 500 }
-    );
+    // Capturer toute erreur non gérée 
+    console.error('Erreur non gérée lors du traitement de la requête:', error);
+    return sendErrorResponse('Erreur inattendue lors du traitement de la requête');
   }
 } 

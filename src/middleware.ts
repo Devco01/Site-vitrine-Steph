@@ -25,6 +25,7 @@ export function middleware(request: NextRequest) {
   // Empêche les accès directs aux routes d'API
   if (request.nextUrl.pathname.startsWith('/api/') && 
       request.nextUrl.pathname !== '/api/contact' &&
+      request.nextUrl.pathname !== '/api/send-email' &&
       request.nextUrl.pathname !== '/api/sitemap' &&
       request.nextUrl.pathname !== '/api/robots') {
     return new NextResponse(null, { status: 404 });
