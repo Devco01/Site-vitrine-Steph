@@ -1,287 +1,267 @@
 "use client";
 
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { useState, FormEvent } from 'react';
 import { motion } from 'framer-motion';
+import { fadeIn } from '@/utils/motionVariants';
+import emailjs from '@emailjs/browser';
 
-// Définition du schéma de validation
-const formSchema = z.object({
-  nom: z.string().min(2, { message: 'Le nom doit comporter au moins 2 caractères' }),
-  email: z.string().email({ message: 'Veuillez saisir une adresse e-mail valide' }),
-  telephone: z
-    .string()
-    .regex(/^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/, {
-      message: 'Veuillez saisir un numéro de téléphone français valide',
-    }),
-  sujet: z.string().min(3, { message: 'Veuillez sélectionner un sujet' }),
-  message: z.string().min(10, { message: 'Le message doit comporter au moins 10 caractères' }),
-  consentement: z.boolean().refine((val) => val === true, {
-    message: 'Vous devez accepter la politique de confidentialité',
-  }),
-});
+// Type pour les données du formulaire
+interface FormData {
+  nom: string;
+  email: string;
+  telephone: string;
+  sujet: string;
+  message: string;
+}
 
-type FormData = z.infer<typeof formSchema>;
+// Type pour les erreurs du formulaire
+interface FormErrors {
+  nom?: string;
+  email?: string;
+  message?: string;
+}
 
-const ContactForm = () => {
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitSuccess, setSubmitSuccess] = useState(false);
-  const [submitError, setSubmitError] = useState('');
-
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm<FormData>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      nom: '',
-      email: '',
-      telephone: '',
-      sujet: '',
-      message: '',
-      consentement: false,
-    },
+export default function ContactForm() {
+  // États pour le formulaire
+  const [formData, setFormData] = useState<FormData>({
+    nom: '',
+    email: '',
+    telephone: '',
+    sujet: 'Demande de devis',
+    message: '',
   });
+  const [errors, setErrors] = useState<FormErrors>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{
+    success?: boolean;
+    message?: string;
+  }>({});
 
-  const onSubmit = async (data: FormData) => {
+  // Gestion des changements dans le formulaire
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+    
+    // Effacer l'erreur pour ce champ s'il est rempli
+    if (value.trim() && errors[name as keyof FormErrors]) {
+      setErrors({ ...errors, [name]: undefined });
+    }
+  };
+
+  // Validation du formulaire
+  const validateForm = (): boolean => {
+    const newErrors: FormErrors = {};
+    
+    if (!formData.nom.trim()) {
+      newErrors.nom = 'Veuillez entrer votre nom';
+    }
+    
+    if (!formData.email.trim()) {
+      newErrors.email = 'Veuillez entrer votre email';
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = 'Veuillez entrer un email valide';
+    }
+    
+    if (!formData.message.trim()) {
+      newErrors.message = 'Veuillez entrer votre message';
+    }
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  // Soumission du formulaire
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    
+    // Valider le formulaire
+    if (!validateForm()) {
+      return;
+    }
+    
     setIsSubmitting(true);
-    setSubmitError('');
-
+    setSubmitStatus({});
+    
     try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-
-      if (!response.ok) {
-        throw new Error('Erreur lors de l\'envoi du formulaire');
-      }
-
-      setSubmitSuccess(true);
-      reset();
+      // Configuration d'EmailJS
+      const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || 'service_default';
+      const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || 'template_default';
+      const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || '';
       
-      // Réinitialiser l'état de succès après 5 secondes
-      setTimeout(() => {
-        setSubmitSuccess(false);
-      }, 5000);
+      // Préparation des paramètres du template
+      const templateParams = {
+        from_name: formData.nom,
+        reply_to: formData.email,
+        telephone: formData.telephone || 'Non fourni',
+        sujet: formData.sujet,
+        message: formData.message,
+      };
+      
+      // Vérifier si nous sommes en environnement de développement
+      const isDevelopment = typeof window !== 'undefined' && 
+        (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
+      
+      if (isDevelopment) {
+        // En développement, simuler l'envoi d'email pour éviter les problèmes de CSP
+        console.log('Mode développement : simulation d\'envoi d\'email avec ces paramètres :', templateParams);
+        // Attendre un délai artificiel pour simuler l'envoi
+        await new Promise(resolve => setTimeout(resolve, 1000));
+      } else {
+        // En production, envoyer réellement l'email
+        await emailjs.send(serviceId, templateId, templateParams, publicKey);
+      }
+      
+      // Réinitialiser le formulaire après succès
+      setFormData({
+        nom: '',
+        email: '',
+        telephone: '',
+        sujet: 'Demande de devis',
+        message: '',
+      });
+      
+      setSubmitStatus({
+        success: true,
+        message: 'Votre message a été envoyé avec succès ! Nous vous contacterons bientôt.',
+      });
     } catch (error) {
-      setSubmitError('Une erreur est survenue lors de l\'envoi du formulaire. Veuillez réessayer.');
-      console.error('Erreur d\'envoi du formulaire :', error);
+      console.error('Erreur lors de l\'envoi du message:', error);
+      setSubmitStatus({
+        success: false,
+        message: 'Une erreur est survenue lors de l\'envoi du message. Veuillez réessayer ultérieurement.',
+      });
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const inputVariants = {
-    focus: { scale: 1.01, borderColor: '#3B82F6' },
-    error: { x: [0, -5, 5, -5, 5, 0], transition: { duration: 0.4 } },
-  };
-
-  // Ajouter une classe CSS personnalisée pour les placeholders
-  const inputClasses = `mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 bg-white placeholder-gray-500 text-gray-800`;
-  const inputErrorClasses = `mt-1 block w-full px-3 py-2 border border-red-500 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 bg-white placeholder-gray-500 text-gray-800`;
-
   return (
-    <div className="bg-white rounded-lg shadow-lg p-6 md:p-8">
-      {submitSuccess ? (
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-center py-8"
-        >
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-100 text-green-500 mb-4">
-            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-            </svg>
-          </div>
-          <h3 className="text-2xl font-bold text-gray-900 mb-2">Message envoyé !</h3>
-          <p className="text-gray-600 mb-6">
-            Merci de nous avoir contactés. Nous vous répondrons dans les plus brefs délais.
-          </p>
-          <button
-            onClick={() => setSubmitSuccess(false)}
-            className="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
+    <motion.div
+      variants={fadeIn('up', 0.2)}
+      initial="hidden"
+      animate="show"
+      className="w-full max-w-2xl mx-auto bg-white rounded-lg overflow-hidden shadow-lg"
+    >
+      <div className="px-6 py-8">
+        <h3 className="text-2xl font-semibold text-gray-800 mb-6">Envoyez-nous un message</h3>
+        
+        {submitStatus.message && (
+          <div
+            className={`p-4 mb-6 rounded-md ${
+              submitStatus.success
+                ? 'bg-green-50 text-green-700 border border-green-200'
+                : 'bg-red-50 text-red-700 border border-red-200'
+            }`}
           >
-            Nouveau message
-          </button>
-        </motion.div>
-      ) : (
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-          <div>
-            <label htmlFor="nom" className="block text-sm font-medium text-gray-800">
-              Nom complet <span className="text-red-500">*</span>
-            </label>
-            <motion.div
-              whileFocus="focus"
-              animate={errors.nom ? "error" : ""}
-              variants={inputVariants}
-            >
+            {submitStatus.message}
+          </div>
+        )}
+        
+        <form onSubmit={handleSubmit}>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div>
+              <label htmlFor="nom" className="block text-gray-700 font-medium mb-2">
+                Nom complet *
+              </label>
               <input
+                type="text"
                 id="nom"
-                type="text"
-                className={errors.nom ? inputErrorClasses : inputClasses}
-                {...register('nom')}
+                name="nom"
+                value={formData.nom}
+                onChange={handleChange}
+                className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                  errors.nom ? 'border-red-500' : 'border-gray-300'
+                }`}
+                placeholder="Votre nom"
               />
-            </motion.div>
-            {errors.nom && (
-              <p className="mt-1 text-sm text-red-600">{errors.nom.message}</p>
-            )}
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-800">
-                Email <span className="text-red-500">*</span>
-              </label>
-              <motion.div
-                whileFocus="focus"
-                animate={errors.email ? "error" : ""}
-                variants={inputVariants}
-              >
-                <input
-                  id="email"
-                  type="email"
-                  className={errors.email ? inputErrorClasses : inputClasses}
-                  {...register('email')}
-                />
-              </motion.div>
-              {errors.email && (
-                <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
-              )}
+              {errors.nom && <p className="mt-1 text-red-500 text-sm">{errors.nom}</p>}
             </div>
-
+            
             <div>
-              <label htmlFor="telephone" className="block text-sm font-medium text-gray-800">
-                Téléphone <span className="text-red-500">*</span>
+              <label htmlFor="email" className="block text-gray-700 font-medium mb-2">
+                Email *
               </label>
-              <motion.div
-                whileFocus="focus"
-                animate={errors.telephone ? "error" : ""}
-                variants={inputVariants}
-              >
-                <input
-                  id="telephone"
-                  type="tel"
-                  className={errors.telephone ? inputErrorClasses : inputClasses}
-                  placeholder="Ex: 06 12 34 56 78"
-                  {...register('telephone')}
-                />
-              </motion.div>
-              {errors.telephone && (
-                <p className="mt-1 text-sm text-red-600">{errors.telephone.message}</p>
-              )}
-            </div>
-          </div>
-
-          <div>
-            <label htmlFor="sujet" className="block text-sm font-medium text-gray-800">
-              Sujet <span className="text-red-500">*</span>
-            </label>
-            <motion.div
-              whileFocus="focus"
-              animate={errors.sujet ? "error" : ""}
-              variants={inputVariants}
-            >
               <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                  errors.email ? 'border-red-500' : 'border-gray-300'
+                }`}
+                placeholder="Votre email"
+              />
+              {errors.email && <p className="mt-1 text-red-500 text-sm">{errors.email}</p>}
+            </div>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div>
+              <label htmlFor="telephone" className="block text-gray-700 font-medium mb-2">
+                Téléphone
+              </label>
+              <input
+                type="tel"
+                id="telephone"
+                name="telephone"
+                value={formData.telephone}
+                onChange={handleChange}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Votre numéro de téléphone"
+              />
+            </div>
+            
+            <div>
+              <label htmlFor="sujet" className="block text-gray-700 font-medium mb-2">
+                Sujet
+              </label>
+              <select
                 id="sujet"
-                type="text"
-                placeholder="Écrivez ici"
-                className={errors.sujet ? inputErrorClasses : inputClasses}
-                {...register('sujet')}
-              />
-            </motion.div>
-            {errors.sujet && (
-              <p className="mt-1 text-sm text-red-600">{errors.sujet.message}</p>
-            )}
+                name="sujet"
+                value={formData.sujet}
+                onChange={handleChange}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                <option value="Demande de devis">Demande de devis</option>
+                <option value="Question sur les produits">Question sur les produits</option>
+                <option value="Prise de rendez-vous">Prise de rendez-vous</option>
+                <option value="Autre">Autre</option>
+              </select>
+            </div>
           </div>
-
-          <div>
-            <label htmlFor="message" className="block text-sm font-medium text-gray-800">
-              Message <span className="text-red-500">*</span>
+          
+          <div className="mb-6">
+            <label htmlFor="message" className="block text-gray-700 font-medium mb-2">
+              Message *
             </label>
-            <motion.div
-              whileFocus="focus"
-              animate={errors.message ? "error" : ""}
-              variants={inputVariants}
-            >
-              <textarea
-                id="message"
-                rows={5}
-                className={errors.message ? inputErrorClasses : inputClasses}
-                {...register('message')}
-              ></textarea>
-            </motion.div>
-            {errors.message && (
-              <p className="mt-1 text-sm text-red-600">{errors.message.message}</p>
-            )}
+            <textarea
+              id="message"
+              name="message"
+              rows={5}
+              value={formData.message}
+              onChange={handleChange}
+              className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                errors.message ? 'border-red-500' : 'border-gray-300'
+              }`}
+              placeholder="Votre message"
+            />
+            {errors.message && <p className="mt-1 text-red-500 text-sm">{errors.message}</p>}
           </div>
-
-          <div className="flex items-start">
-            <div className="flex items-center h-5">
-              <input
-                id="consentement"
-                type="checkbox"
-                className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                {...register('consentement')}
-              />
-            </div>
-            <div className="ml-3 text-sm">
-              <label htmlFor="consentement" className="font-medium text-gray-800">
-                J&apos;accepte que mes données soient traitées conformément à la{' '}
-                <a href="/politique-de-confidentialite" className="text-blue-600 hover:underline">
-                  politique de confidentialité
-                </a>{' '}
-                <span className="text-red-500">*</span>
-              </label>
-              {errors.consentement && (
-                <p className="mt-1 text-sm text-red-600">{errors.consentement.message}</p>
-              )}
-            </div>
-          </div>
-
-          {submitError && (
-            <div className="bg-red-50 border border-red-400 text-red-700 px-4 py-3 rounded">
-              <p>{submitError}</p>
-            </div>
-          )}
-
-          <motion.div
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-          >
+          
+          <div className="flex justify-end">
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+              className={`px-6 py-2.5 bg-blue-600 text-white font-medium rounded-md shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-all duration-300 ${
+                isSubmitting ? 'opacity-70 cursor-not-allowed' : ''
+              }`}
             >
-              {isSubmitting ? (
-                <div className="flex items-center">
-                  <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                  </svg>
-                  Envoi en cours...
-                </div>
-              ) : (
-                'Envoyer'
-              )}
+              {isSubmitting ? 'Envoi en cours...' : 'Envoyer le message'}
             </button>
-          </motion.div>
-
-          <p className="text-xs text-gray-500 mt-2">
-            Les champs marqués d&apos;un <span className="text-red-500">*</span> sont obligatoires
-          </p>
+          </div>
         </form>
-      )}
-    </div>
+      </div>
+    </motion.div>
   );
-};
-
-export default ContactForm; 
+} 

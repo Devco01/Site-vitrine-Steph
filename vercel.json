@@ -1,0 +1,22 @@
+{
+  "name": "portails-stephane-bernard",
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/next"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ],
+  "env": {
+    "SENDGRID_API_KEY": "@sendgrid_api_key",
+    "CONTACT_EMAIL": "@contact_email",
+    "SENDER_EMAIL": "@sender_email",
+    "NEXT_PUBLIC_BASE_URL": "@base_url"
+  }
+} 
