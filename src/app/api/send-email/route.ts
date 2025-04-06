@@ -1,8 +1,4 @@
 import { NextResponse } from 'next/server';
-import emailjs from '@emailjs/browser';
-
-// Ajoutez cette ligne après les imports
-emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || '');
 
 // Fonction utilitaire pour envoyer une réponse d'erreur
 function sendErrorResponse(message: string, status: number = 500) {
@@ -77,7 +73,7 @@ export async function POST(request: Request) {
     });
     
     try {
-      // Appel à l'API EmailJS depuis le serveur
+      // Essayer d'appeler l'API directement avec la structure correcte selon la documentation
       const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
         method: 'POST',
         headers: {
@@ -86,7 +82,7 @@ export async function POST(request: Request) {
         body: JSON.stringify({
           service_id: serviceId,
           template_id: templateId,
-          publicKey: publicKey,
+          user_id: publicKey,
           template_params: templateParams,
         }),
       });
