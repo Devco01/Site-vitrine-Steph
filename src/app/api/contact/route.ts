@@ -1,49 +1,33 @@
 import { NextResponse } from 'next/server';
-import nodemailer from 'nodemailer';
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { nom, email, telephone, sujet, message } = body;
+    const { nom, email, message } = body;
 
-    // Configuration du transporteur d'email
-    const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: Number(process.env.SMTP_PORT),
-      secure: true,
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-      },
-    });
+    // Validation basique des entrées
+    if (!nom || !email || !message) {
+      return NextResponse.json(
+        { message: 'Les champs nom, email et message sont obligatoires' },
+        { status: 400 }
+      );
+    }
 
-    // Contenu de l'email
-    const mailOptions = {
-      from: process.env.SMTP_FROM,
-      to: process.env.SMTP_TO,
-      subject: `Nouveau message de contact - ${sujet}`,
-      html: `
-        <h2>Nouveau message de contact</h2>
-        <p><strong>Nom :</strong> ${nom}</p>
-        <p><strong>Email :</strong> ${email}</p>
-        <p><strong>Téléphone :</strong> ${telephone}</p>
-        <p><strong>Sujet :</strong> ${sujet}</p>
-        <p><strong>Message :</strong></p>
-        <p>${message}</p>
-      `,
-    };
-
-    // Envoi de l'email
-    await transporter.sendMail(mailOptions);
-
+    // Avec EmailJS, le traitement des emails se fait côté client
+    // Cette route API est conservée pour validation des données et pour une possibilité
+    // d'extension future (journalisation, analyse anti-spam, etc.)
+    
     return NextResponse.json(
-      { message: 'Message envoyé avec succès' },
+      { 
+        message: 'Requête valide, le message sera traité par EmailJS',
+        success: true
+      },
       { status: 200 }
     );
   } catch (error) {
-    console.error('Erreur lors de l\'envoi de l\'email :', error);
+    console.error('Erreur lors du traitement de la requête:', error);
     return NextResponse.json(
-      { message: 'Erreur lors de l\'envoi du message' },
+      { message: 'Erreur lors du traitement de la requête', success: false },
       { status: 500 }
     );
   }

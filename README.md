@@ -14,7 +14,7 @@ Site vitrine professionnel pour Stéphane Bernard, spécialiste en portails sur 
 
 - Design responsive adapté à tous les appareils
 - Animations fluides avec Framer Motion
-- Formulaire de contact avec validation
+- Formulaire de contact avec validation et envoi d'emails via SendGrid
 - Optimisation SEO avec les métadonnées Next.js
 - Performance optimisée (Core Web Vitals)
 
@@ -23,6 +23,8 @@ Site vitrine professionnel pour Stéphane Bernard, spécialiste en portails sur 
 ```
 src/
   ├── app/                   # Dossier principal de l'application
+  │   ├── api/               # API Routes pour le backend
+  │   │   └── contact/       # API pour le formulaire de contact
   │   ├── components/        # Composants réutilisables
   │   │   ├── animations/    # Composants d'animation
   │   │   ├── contact/       # Composants de la page contact
@@ -49,27 +51,100 @@ src/
    # ou
    yarn install
    ```
+   
+3. Configurer les variables d'environnement
+   ```bash
+   cp .env.example .env.local
+   # Puis modifiez les valeurs dans .env.local
+   ```
 
-3. Lancer le serveur de développement
+   Vous aurez besoin de créer un compte [SendGrid](https://sendgrid.com/) (gratuit) pour obtenir une clé API.
+
+4. Lancer le serveur de développement
    ```bash
    npm run dev
    # ou
    yarn dev
    ```
 
-4. Ouvrir [http://localhost:3000](http://localhost:3000) dans votre navigateur
+5. Ouvrir [http://localhost:3000](http://localhost:3000) dans votre navigateur
+
+
+## Configuration EmailJS
+
+Ce projet utilise EmailJS pour gérer l'envoi d'emails à partir du formulaire de contact.
+
+### Configuration requise
+
+1. Créez un compte sur [EmailJS](https://www.emailjs.com/).
+2. Créez un service de messagerie (par exemple, avec Gmail).
+3. Créez un modèle d'email avec les variables suivantes :
+   - `{{from_name}}` - Nom de l'expéditeur
+   - `{{reply_to}}` - Email pour la réponse
+   - `{{telephone}}` - Numéro de téléphone
+   - `{{sujet}}` - Sujet du message
+   - `{{message}}` - Contenu du message
+
+### Configuration du modèle d'email
+
+Dans l'interface d'EmailJS, créez un modèle avec un contenu similaire à :
+
+```html
+<h1>Nouveau message de contact</h1>
+
+<p>Un message a été envoyé par {{from_name}}.</p>
+
+<h3>Détails du message :</h3>
+<p><strong>Nom :</strong> {{from_name}}</p>
+<p><strong>Email :</strong> {{reply_to}}</p>
+<p><strong>Téléphone :</strong> {{telephone}}</p>
+<p><strong>Sujet :</strong> {{sujet}}</p>
+
+<h3>Message :</h3>
+<div style="background-color: #f5f5f5; padding: 15px; border-radius: 5px;">
+  {{message}}
+</div>
+
+<p>Ce message a été envoyé depuis le formulaire de contact du site web.</p>
+```
+
+### Variables d'environnement
+
+Mettez à jour le fichier `.env.local` avec vos identifiants EmailJS :
+
+```
+NEXT_PUBLIC_EMAILJS_SERVICE_ID=your_service_id
+NEXT_PUBLIC_EMAILJS_TEMPLATE_ID=your_template_id
+NEXT_PUBLIC_EMAILJS_PUBLIC_KEY=your_public_key
+```
+
+Ces valeurs se trouvent dans votre compte EmailJS :
+- Service ID : dans l'onglet "Services"
+- Template ID : dans l'onglet "Email Templates"
+- Public Key : dans l'onglet "Account" > "API Keys"
+
+## Content Security Policy (CSP)
+
+Le projet inclut des règles CSP pour sécuriser le site en production. Ces règles sont définies dans `next.config.ts` et permettent notamment :
+
+- La connexion à l'API EmailJS
+- L'intégration de Google Maps
+- Le chargement d'images depuis diverses sources
+
+En environnement de développement, le formulaire de contact simule l'envoi d'emails pour éviter les problèmes liés aux restrictions CSP.
 
 ## Déploiement
 
-Le site peut être déployé facilement sur Vercel :
+Ce site est conçu pour être déployé sur Vercel ou tout autre hébergeur compatible avec Next.js.
 
-```bash
-npm run build
-# ou
-yarn build
-```
+### Déploiement sur Vercel
 
-Pour un déploiement en production, suivez les [instructions de déploiement Next.js](https://nextjs.org/docs/app/building-your-application/deploying).
+1. Connectez votre compte GitHub à Vercel
+2. Sélectionnez le dépôt contenant le projet
+3. Configurez les variables d'environnement (les mêmes que dans `.env.local`)
+4. Déployez le projet
+
+Après le déploiement, le formulaire de contact utilisera EmailJS pour envoyer des messages directement depuis le navigateur du client, sans passer par un serveur backend.
 
 ## Environnement de développement recommandé
 
