@@ -14,7 +14,7 @@ Site vitrine professionnel pour Stéphane Bernard, spécialiste en portails sur 
 
 - Design responsive adapté à tous les appareils
 - Animations fluides avec Framer Motion
-- Formulaire de contact avec validation et envoi d'emails via SendGrid
+- Formulaire de contact avec validation et envoi d'emails via EmailJS
 - Optimisation SEO avec les métadonnées Next.js
 - Performance optimisée (Core Web Vitals)
 
@@ -57,8 +57,6 @@ src/
    cp .env.example .env.local
    # Puis modifiez les valeurs dans .env.local
    ```
-
-   Vous aurez besoin de créer un compte [SendGrid](https://sendgrid.com/) (gratuit) pour obtenir une clé API.
 
 4. Lancer le serveur de développement
    ```bash

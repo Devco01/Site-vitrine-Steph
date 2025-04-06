@@ -14,9 +14,9 @@
     }
   ],
   "env": {
-    "SENDGRID_API_KEY": "@sendgrid_api_key",
-    "CONTACT_EMAIL": "@contact_email",
-    "SENDER_EMAIL": "@sender_email",
+    "NEXT_PUBLIC_EMAILJS_SERVICE_ID": "@emailjs_service_id",
+    "NEXT_PUBLIC_EMAILJS_TEMPLATE_ID": "@emailjs_template_id",
+    "NEXT_PUBLIC_EMAILJS_PUBLIC_KEY": "@emailjs_public_key",
     "NEXT_PUBLIC_BASE_URL": "@base_url"
   }
 } 
