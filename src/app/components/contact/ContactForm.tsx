@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, FormEvent } from 'react';
+import { useState, FormEvent, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { fadeIn } from '@/utils/motionVariants';
+import emailjs from '@emailjs/browser';
 
 // Type pour les données du formulaire
 interface FormData {
@@ -21,6 +22,9 @@ interface FormErrors {
 }
 
 export default function ContactForm() {
+  // Référence au formulaire pour EmailJS
+  const formRef = useRef<HTMLFormElement>(null);
+  
   // États pour le formulaire
   const [formData, setFormData] = useState<FormData>({
     nom: '',
@@ -82,47 +86,53 @@ export default function ContactForm() {
     setSubmitStatus({});
     
     try {
-      console.log('Envoi du formulaire - données:', formData);
+      console.log('Envoi du formulaire via EmailJS');
+
+      // Configuration de EmailJS
+      const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || '';
+      const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || '';
+      const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || '';
       
-      // Envoi du formulaire via notre API serveur
-      const response = await fetch('/api/send-email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
+      // Logs pour débugger les variables d'environnement
+      console.log('Vérification des variables:', { 
+        serviceId: serviceId ? 'défini' : 'non défini', 
+        templateId: templateId ? 'défini' : 'non défini',
+        publicKey: publicKey ? 'défini' : 'non défini'
       });
 
-      console.log('Réponse reçue:', { 
-        status: response.status, 
-        statusText: response.statusText,
-        ok: response.ok 
-      });
-
-      // Récupérer le texte brut de la réponse
-      const responseText = await response.text();
-      console.log('Réponse texte:', responseText);
-      
-      // Vérification de la réponse vide
-      if (!responseText || responseText.trim() === '') {
-        console.error('Réponse vide reçue du serveur');
-        throw new Error('Aucune réponse reçue du serveur. Veuillez réessayer plus tard.');
-      }
-      
-      // Essayer de parser le JSON, s'il est valide
-      let data;
-      try {
-        data = JSON.parse(responseText);
-        console.log('Données JSON analysées:', data);
-      } catch (parseError) {
-        console.error('Erreur de parsing JSON:', parseError);
-        console.error('Réponse non-JSON reçue:', responseText);
-        throw new Error('Format de réponse invalide. Veuillez contacter l\'administrateur.');
-      }
-      
-      if (!response.ok) {
-        console.error('Erreur de réponse API:', data);
-        throw new Error(data?.message || 'Erreur lors de l\'envoi du message');
+      // Si le formulaire n'est pas disponible, utiliser les données d'état
+      if (!formRef.current) {
+        console.log('Utilisation des données d\'état pour l\'envoi');
+        
+        // Préparation des paramètres du template
+        const templateParams = {
+          from_name: formData.nom,
+          reply_to: formData.email,
+          telephone: formData.telephone || 'Non fourni',
+          sujet: formData.sujet || 'Sans sujet',
+          message: formData.message,
+        };
+        
+        // Envoyer l'email via EmailJS directement
+        const result = await emailjs.send(
+          serviceId,
+          templateId,
+          templateParams,
+          publicKey
+        );
+        
+        console.log('Résultat de l\'envoi:', result);
+      } else {
+        // Utiliser la référence du formulaire directement
+        console.log('Utilisation de la référence du formulaire pour l\'envoi');
+        const result = await emailjs.sendForm(
+          serviceId,
+          templateId,
+          formRef.current,
+          publicKey
+        );
+        
+        console.log('Résultat de l\'envoi:', result);
       }
       
       // Réinitialiser le formulaire après succès
@@ -140,11 +150,14 @@ export default function ContactForm() {
       });
     } catch (error) {
       console.error('Erreur lors de l\'envoi du message:', error);
+      
+      const errorMessage = error instanceof Error 
+        ? error.message 
+        : 'Une erreur est survenue lors de l\'envoi du message';
+      
       setSubmitStatus({
         success: false,
-        message: typeof error === 'object' && error !== null && 'message' in error 
-          ? (error as Error).message 
-          : 'Une erreur est survenue lors de l\'envoi du message. Veuillez réessayer ultérieurement.',
+        message: `Erreur lors de l'envoi de l'email: ${errorMessage}`,
       });
     } finally {
       setIsSubmitting(false);
@@ -173,16 +186,16 @@ export default function ContactForm() {
           </div>
         )}
         
-        <form onSubmit={handleSubmit}>
+        <form ref={formRef} onSubmit={handleSubmit}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
             <div>
-              <label htmlFor="nom" className="block text-gray-700 font-medium mb-2">
+              <label htmlFor="from_name" className="block text-gray-700 font-medium mb-2">
                 Nom complet *
               </label>
               <input
                 type="text"
-                id="nom"
-                name="nom"
+                id="from_name"
+                name="from_name"
                 value={formData.nom}
                 onChange={handleChange}
                 className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
@@ -194,13 +207,13 @@ export default function ContactForm() {
             </div>
             
             <div>
-              <label htmlFor="email" className="block text-gray-700 font-medium mb-2">
+              <label htmlFor="reply_to" className="block text-gray-700 font-medium mb-2">
                 Email *
               </label>
               <input
                 type="email"
-                id="email"
-                name="email"
+                id="reply_to"
+                name="reply_to"
                 value={formData.email}
                 onChange={handleChange}
                 className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
