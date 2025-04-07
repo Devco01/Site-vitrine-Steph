@@ -1,7 +1,6 @@
 import { Metadata } from 'next';
 import ContactBanner from '../components/contact/ContactBanner';
 import ContactForm from '../components/contact/ContactForm';
-import ContactInfo from '../components/contact/ContactInfo';
 import PageWrapper from '../components/layout/PageWrapper';
 
 export const metadata: Metadata = {
@@ -68,7 +67,18 @@ export default function ContactPage() {
           </div>
           
           <div className="lg:col-span-1">
-            <ContactInfo />
+            <div className="bg-gradient-to-b from-white to-blue-50 rounded-lg shadow-md p-6 md:p-8 h-full">
+              <h2 className="text-2xl font-bold text-blue-800 mb-4 pb-2 border-b border-blue-100">Nous Trouver</h2>
+              <div className="h-64 bg-gray-200 rounded-lg overflow-hidden shadow-md">
+                <iframe
+                  title="Carte de localisation"
+                  className="w-full h-full"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2801.0599944502296!2d-1.1689444844987696!3d45.43051447910044!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48014b8c41a9825d%3A0xe7a1d90fd4c19863!2s58%20Rue%20des%20Sauniers%2C%2017530%20Arvert!5e0!3m2!1sfr!2sfr!4v1616539253588!5m2!1sfr!2sfr"
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                ></iframe>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -83,7 +93,7 @@ export default function ContactPage() {
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <a 
                 href="tel:0664953092"
-                className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 transition-colors duration-200 shadow-sm"
+                className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1"
               >
                 <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
@@ -93,52 +103,13 @@ export default function ContactPage() {
               
               <a 
                 href="mailto:bernard.s.portails@gmail.com"
-                className="inline-flex items-center justify-center px-6 py-3 border border-blue-600 text-base font-medium rounded-md text-blue-600 bg-white hover:bg-blue-50 transition-colors duration-200 shadow-sm"
+                className="inline-flex items-center justify-center px-6 py-3 border border-blue-600 text-base font-medium rounded-md text-blue-600 bg-white hover:bg-blue-50 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1"
               >
                 <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
                 Envoyer un email
               </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-12 bg-white">
-        <div className="container mx-auto px-4">
-          <h2 className="text-2xl font-bold text-center mb-8 text-gray-800">
-            Zones d&apos;intervention en Charente-Maritime
-          </h2>
-          <div className="max-w-4xl mx-auto">
-            <p className="text-center text-gray-700 mb-6">
-              Stéphane Bernard intervient pour l&apos;installation et la réparation de portails aluminium dans un rayon de 50km autour d&apos;Arvert, couvrant les principales villes de Charente-Maritime :
-            </p>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-              <div className="bg-gray-50 p-3 rounded-lg">
-                <p className="font-semibold text-blue-600">Arvert (17530)</p>
-              </div>
-              <div className="bg-gray-50 p-3 rounded-lg">
-                <p className="font-semibold text-blue-600">Royan (17200)</p>
-              </div>
-              <div className="bg-gray-50 p-3 rounded-lg">
-                <p className="font-semibold text-blue-600">La Tremblade (17390)</p>
-              </div>
-              <div className="bg-gray-50 p-3 rounded-lg">
-                <p className="font-semibold text-blue-600">Marennes (17320)</p>
-              </div>
-              <div className="bg-gray-50 p-3 rounded-lg">
-                <p className="font-semibold text-blue-600">Saint-Georges-de-Didonne</p>
-              </div>
-              <div className="bg-gray-50 p-3 rounded-lg">
-                <p className="font-semibold text-blue-600">Saujon (17600)</p>
-              </div>
-              <div className="bg-gray-50 p-3 rounded-lg">
-                <p className="font-semibold text-blue-600">La Rochelle (17000)</p>
-              </div>
-              <div className="bg-gray-50 p-3 rounded-lg">
-                <p className="font-semibold text-blue-600">Saint-Palais-sur-Mer</p>
-              </div>
             </div>
           </div>
         </div>
