@@ -54,7 +54,7 @@ const ContactBanner = () => {
             <a 
               href="#contactForm"
               onClick={scrollToContact}
-              className="inline-flex items-center justify-center px-6 py-3 bg-white text-blue-600 font-medium rounded-md shadow-md hover:bg-blue-50 transition-colors duration-300"
+              className="inline-flex items-center justify-center px-6 py-3 bg-white text-blue-600 font-medium rounded-md shadow-lg hover:bg-blue-50 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
             >
               Nous contacter
               <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

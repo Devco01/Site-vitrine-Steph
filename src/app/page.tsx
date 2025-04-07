@@ -49,13 +49,13 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link 
               href="/contact" 
-              className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-300 shadow-lg"
+              className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1"
             >
               Demander un devis gratuit
             </Link>
             <Link 
               href="/realisations" 
-              className="bg-white hover:bg-gray-100 text-blue-600 font-semibold py-3 px-6 rounded-lg transition-colors duration-300 shadow-lg"
+              className="bg-gray-800 hover:bg-gray-900 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1"
             >
               Voir nos réalisations
             </Link>
@@ -103,106 +103,7 @@ export default function Home() {
       
       <Products />
       
-      {/* Section Services */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">
-            Nos services de <span className="text-blue-600">portails</span> en Charente-Maritime
-          </h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-              <div className="h-12 w-12 bg-blue-600 rounded-full flex items-center justify-center mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold mb-3 text-gray-800">Fabrication sur mesure</h3>
-              <p className="text-gray-700">
-                Conception et fabrication de portails aluminium sur mesure adaptés à vos besoins spécifiques et aux dimensions de votre entrée.
-              </p>
-            </div>
-            <div className="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-              <div className="h-12 w-12 bg-blue-600 rounded-full flex items-center justify-center mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold mb-3 text-gray-800">Installation professionnelle</h3>
-              <p className="text-gray-700">
-                Installation soignée par nos équipes expérimentées dans toute la Charente-Maritime : Arvert, Royan, La Tremblade, Marennes et environs.
-              </p>
-            </div>
-            <div className="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-              <div className="h-12 w-12 bg-blue-600 rounded-full flex items-center justify-center mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold mb-3 text-gray-800">Motorisation & Réparation</h3>
-              <p className="text-gray-700">
-                Service de motorisation de portails existants et réparation rapide en cas de panne ou de dysfonctionnement.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-      
       <ContactCTA />
-      
-      {/* Section Avantages */}
-      <section className="py-16 bg-gray-100">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">
-            Pourquoi choisir <span className="text-blue-600">Stéphane Bernard</span> pour votre portail ?
-          </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-white p-6 rounded-lg shadow-md text-center">
-              <div className="h-16 w-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                </svg>
-              </div>
-              <h3 className="text-lg font-semibold mb-2 text-gray-800">Artisan local</h3>
-              <p className="text-gray-700">
-                Entreprise locale basée à Arvert, connaissant parfaitement les spécificités de la région.
-              </p>
-            </div>
-            <div className="bg-white p-6 rounded-lg shadow-md text-center">
-              <div className="h-16 w-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                </svg>
-              </div>
-              <h3 className="text-lg font-semibold mb-2 text-gray-800">Qualité garantie</h3>
-              <p className="text-gray-700">
-                Matériaux de haute qualité et finitions soignées pour une durabilité exceptionnelle.
-              </p>
-            </div>
-            <div className="bg-white p-6 rounded-lg shadow-md text-center">
-              <div className="h-16 w-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <h3 className="text-lg font-semibold mb-2 text-gray-800">Intervention rapide</h3>
-              <p className="text-gray-700">
-                Service réactif pour l&apos;installation et le dépannage dans toute la Charente-Maritime.
-              </p>
-            </div>
-            <div className="bg-white p-6 rounded-lg shadow-md text-center">
-              <div className="h-16 w-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
-                </svg>
-              </div>
-              <h3 className="text-lg font-semibold mb-2 text-gray-800">Devis gratuit</h3>
-              <p className="text-gray-700">
-                Étude personnalisée et devis détaillé sans engagement pour votre projet de portail.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
     </PageWrapper>
   );
 }
