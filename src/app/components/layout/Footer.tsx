@@ -15,15 +15,19 @@ const Footer = () => {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "LocalBusiness",
-              "name": "Stéphane Bernard - Portails sur mesure",
-              "image": "https://stephane-bernard-portails.fr/Logo.png",
-              "url": "https://stephane-bernard-portails.fr",
+              "name": "Stéphane Bernard - Portails Aluminium sur mesure",
+              "image": "https://stephane-bernard.com/Logo.png",
+              "url": "https://stephane-bernard.com",
               "telephone": "06.64.95.30.92",
+              "email": "bernard.s.portails@gmail.com",
+              "currenciesAccepted": "EUR",
+              "paymentAccepted": "Carte bancaire, Espèces, Chèque, Virement",
               "address": {
                 "@type": "PostalAddress",
                 "streetAddress": "58 rue des sauniers",
                 "addressLocality": "Arvert",
                 "postalCode": "17530",
+                "addressRegion": "Nouvelle-Aquitaine",
                 "addressCountry": "FR"
               },
               "geo": {
@@ -31,21 +35,83 @@ const Footer = () => {
                 "latitude": "45.7348",
                 "longitude": "-1.1688"
               },
-              "openingHoursSpecification": {
-                "@type": "OpeningHoursSpecification",
-                "dayOfWeek": [
-                  "Monday",
-                  "Tuesday",
-                  "Wednesday",
-                  "Thursday",
-                  "Friday"
-                ],
-                "opens": "08:00",
-                "closes": "18:00"
-              },
+              "openingHoursSpecification": [
+                {
+                  "@type": "OpeningHoursSpecification",
+                  "dayOfWeek": [
+                    "Monday",
+                    "Tuesday",
+                    "Wednesday",
+                    "Thursday",
+                    "Friday"
+                  ],
+                  "opens": "08:00",
+                  "closes": "12:00"
+                },
+                {
+                  "@type": "OpeningHoursSpecification",
+                  "dayOfWeek": [
+                    "Monday",
+                    "Tuesday",
+                    "Wednesday",
+                    "Thursday",
+                    "Friday"
+                  ],
+                  "opens": "14:00",
+                  "closes": "18:00"
+                }
+              ],
               "priceRange": "€€",
-              "servesCuisine": "Portails sur mesure, Portails aluminium",
-              "description": "Entreprise spécialisée dans les portails sur mesure à Arvert (17530). Installation, réparation et dépannage de portails aluminium en Charente-Maritime."
+              "areaServed": {
+                "@type": "GeoCircle",
+                "geoMidpoint": {
+                  "@type": "GeoCoordinates",
+                  "latitude": "45.7348",
+                  "longitude": "-1.1688"
+                },
+                "geoRadius": "50000"
+              },
+              "knowsAbout": ["Portails aluminium", "Automatisation de portail", "Motorisation de portail", "Réparation de portail", "Installation de portail"],
+              "serviceArea": {
+                "@type": "GeoCircle",
+                "geoMidpoint": {
+                  "@type": "GeoCoordinates",
+                  "latitude": "45.7348",
+                  "longitude": "-1.1688"
+                },
+                "geoRadius": "50000"
+              },
+              "hasOfferCatalog": {
+                "@type": "OfferCatalog",
+                "name": "Services de portails aluminium",
+                "itemListElement": [
+                  {
+                    "@type": "Offer",
+                    "itemOffered": {
+                      "@type": "Service",
+                      "name": "Installation de portails sur mesure"
+                    }
+                  },
+                  {
+                    "@type": "Offer",
+                    "itemOffered": {
+                      "@type": "Service",
+                      "name": "Réparation de portails"
+                    }
+                  },
+                  {
+                    "@type": "Offer",
+                    "itemOffered": {
+                      "@type": "Service",
+                      "name": "Motorisation de portails"
+                    }
+                  }
+                ]
+              },
+              "sameAs": [
+                "https://www.facebook.com/p/Entreprise-Bernard-St%C3%A9phane-100062329458219/"
+              ],
+              "description": "Artisan spécialisé dans la fabrication, l'installation et la réparation de portails aluminium sur mesure à Arvert et dans toute la Charente-Maritime (17). Devis gratuit et intervention rapide."
             })
           }}
         />
