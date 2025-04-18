@@ -99,6 +99,20 @@ const realisationsData = [
     category: 'Découpes Laser'
   },
   {
+    id: 24,
+    title: 'Rambarde Moderne avec Motif',
+    description: 'Rambarde de balcon avec motif nature découpé au laser.',
+    imageSrc: '/Slide34.jpg',
+    category: 'Découpes Laser'
+  },
+  {
+    id: 25,
+    title: 'Portail Design Contemporain',
+    description: 'Portail coulissant avec motifs géométriques découpés au laser.',
+    imageSrc: '/Slide35.jpg',
+    category: 'Découpes Laser'
+  },
+  {
     id: 14,
     title: 'Garde-corps Contemporain',
     description: 'Garde-corps aluminium avec design moderne pour balcon.',

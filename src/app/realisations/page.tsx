@@ -16,7 +16,7 @@ const categories = [
     subcategories: [
       { id: 'portails-pleins', name: 'Portails Pleins', slides: [3, 4, 5, 7, 8, 9, 10] },
       { id: 'portails-barreaudes', name: 'Portails Barreaudés', slides: [12, 13, 14, 15] },
-      { id: 'decoupes-laser', name: 'Découpes Laser', slides: [17, 18, 'Hero'] }
+      { id: 'decoupes-laser', name: 'Découpes Laser', slides: [17, 18, 'Hero', 34, 35] }
     ]
   },
   { 
