@@ -60,7 +60,7 @@ export default function ContactPage() {
               <h2 className="text-2xl font-bold text-blue-800 mb-4 pb-2 border-b border-blue-100">Demande de devis ou d&apos;information</h2>
               <p className="text-gray-700 mb-6">
                 Besoin d&apos;un <strong>devis pour votre portail aluminium</strong> à Arvert, Royan, La Tremblade ou dans les environs ? 
-                Complétez simplement ce formulaire et nous vous répondrons sous 24h.
+                Complétez simplement ce formulaire et nous vous répondrons dans les plus brefs délais.
               </p>
               <ContactForm />
             </div>
