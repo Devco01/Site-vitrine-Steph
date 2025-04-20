@@ -78,7 +78,7 @@ const Testimonials = () => {
                 </blockquote>
                 <FadeIn direction="right" delay={0.2} duration={0.4}>
                   <div className="flex items-center">
-                    <div className="bg-blue-600 rounded-full w-10 h-10 flex items-center justify-center text-white font-semibold">
+                    <div className="bg-gray-600 rounded-full w-10 h-10 flex items-center justify-center text-white font-semibold">
                       {testimonial.name.charAt(0)}
                     </div>
                     <div className="ml-3">

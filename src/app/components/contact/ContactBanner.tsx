@@ -12,13 +12,13 @@ const ContactBanner = () => {
   };
 
   return (
-    <section className="relative bg-gradient-to-r from-blue-600 to-blue-500 py-16 md:py-24 overflow-hidden">
+    <section className="relative bg-gradient-to-r from-gray-600 to-gray-500 py-16 md:py-24 overflow-hidden">
       {/* Éléments décoratifs */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden">
-        <div className="absolute -top-24 -left-24 w-48 h-48 md:w-96 md:h-96 bg-blue-300 rounded-full opacity-20"></div>
-        <div className="absolute -bottom-24 -right-24 w-64 h-64 md:w-96 md:h-96 bg-blue-200 rounded-full opacity-20"></div>
-        <div className="absolute top-1/2 right-1/4 w-12 h-12 bg-blue-100 rounded-full opacity-20"></div>
-        <div className="absolute bottom-1/3 left-1/4 w-20 h-20 bg-blue-100 rounded-full opacity-15"></div>
+        <div className="absolute -top-24 -left-24 w-48 h-48 md:w-96 md:h-96 bg-gray-300 rounded-full opacity-20"></div>
+        <div className="absolute -bottom-24 -right-24 w-64 h-64 md:w-96 md:h-96 bg-gray-200 rounded-full opacity-20"></div>
+        <div className="absolute top-1/2 right-1/4 w-12 h-12 bg-gray-100 rounded-full opacity-20"></div>
+        <div className="absolute bottom-1/3 left-1/4 w-20 h-20 bg-gray-100 rounded-full opacity-15"></div>
       </div>
       
       <div className="container mx-auto px-4 relative z-10">
@@ -37,7 +37,7 @@ const ContactBanner = () => {
             Contactez-Nous
           </motion.h1>
           <motion.p 
-            className="text-lg md:text-xl text-blue-50 mb-8"
+            className="text-lg md:text-xl text-gray-100 mb-8"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
@@ -54,7 +54,7 @@ const ContactBanner = () => {
             <a 
               href="#contactForm"
               onClick={scrollToContact}
-              className="inline-flex items-center justify-center px-6 py-3 bg-white text-blue-600 font-medium rounded-md shadow-lg hover:bg-blue-50 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+              className="inline-flex items-center justify-center px-6 py-3 bg-white text-gray-600 font-medium rounded-md shadow-lg hover:bg-gray-50 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
             >
               Nous contacter
               <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

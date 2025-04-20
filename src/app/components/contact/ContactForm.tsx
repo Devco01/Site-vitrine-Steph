@@ -198,7 +198,7 @@ export default function ContactForm() {
                 name="from_name"
                 value={formData.from_name}
                 onChange={handleChange}
-                className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 ${
                   errors.from_name ? 'border-red-500' : 'border-gray-300'
                 }`}
                 placeholder="Votre nom"
@@ -216,7 +216,7 @@ export default function ContactForm() {
                 name="reply_to"
                 value={formData.reply_to}
                 onChange={handleChange}
-                className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 ${
                   errors.reply_to ? 'border-red-500' : 'border-gray-300'
                 }`}
                 placeholder="Votre email"
@@ -236,7 +236,7 @@ export default function ContactForm() {
                 name="telephone"
                 value={formData.telephone}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500"
                 placeholder="Votre numéro de téléphone"
               />
             </div>
@@ -250,7 +250,7 @@ export default function ContactForm() {
                 name="sujet"
                 value={formData.sujet}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500"
               >
                 <option value="Demande de devis">Demande de devis</option>
                 <option value="Question sur les produits">Question sur les produits</option>
@@ -270,7 +270,7 @@ export default function ContactForm() {
               rows={5}
               value={formData.message}
               onChange={handleChange}
-              className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+              className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 ${
                 errors.message ? 'border-red-500' : 'border-gray-300'
               }`}
               placeholder="Votre message"
@@ -282,7 +282,7 @@ export default function ContactForm() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className={`px-6 py-2.5 bg-blue-600 text-white font-medium rounded-md shadow-lg hover:bg-blue-700 hover:shadow-xl hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-all duration-300 ${
+              className={`px-6 py-2.5 bg-gray-600 text-white font-medium rounded-md shadow-lg hover:bg-gray-700 hover:shadow-xl hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50 transition-all duration-300 ${
                 isSubmitting ? 'opacity-70 cursor-not-allowed' : ''
               }`}
             >

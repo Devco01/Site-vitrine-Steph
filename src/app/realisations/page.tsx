@@ -10,9 +10,9 @@ const categories = [
   { 
     id: 'portails', 
     name: 'Portails', 
-    color: 'bg-blue-600',
-    textColor: 'text-blue-600',
-    hoverColor: 'hover:bg-blue-50',
+    color: 'bg-gray-600',
+    textColor: 'text-gray-600',
+    hoverColor: 'hover:bg-gray-50',
     subcategories: [
       { id: 'portails-pleins', name: 'Portails Pleins', slides: [3, 4, 5, 7, 8, 9, 10] },
       { id: 'portails-barreaudes', name: 'Portails Barreaudés', slides: [12, 13, 14, 15] },
@@ -22,9 +22,9 @@ const categories = [
   { 
     id: 'autres', 
     name: 'Autres Produits',
-    color: 'bg-teal-600',
-    textColor: 'text-teal-600',
-    hoverColor: 'hover:bg-teal-50',
+    color: 'bg-gray-500',
+    textColor: 'text-gray-500',
+    hoverColor: 'hover:bg-gray-50',
     subcategories: [
       { id: 'balcons-garde-corps', name: 'Balcons & Garde-corps', slides: [20, 21] },
       { id: 'clotures', name: 'Clôtures', slides: [23] },
@@ -35,9 +35,9 @@ const categories = [
   { 
     id: 'decoration', 
     name: 'Motifs et Couleurs',
-    color: 'bg-purple-600',
-    textColor: 'text-purple-600',
-    hoverColor: 'hover:bg-purple-50',
+    color: 'bg-gray-400',
+    textColor: 'text-gray-400',
+    hoverColor: 'hover:bg-gray-50',
     subcategories: [
       { id: 'motifs-laser', name: 'Motifs Laser', slides: [29, 30, 31, 32] },
       { id: 'nuanciers', name: 'Nuanciers', slides: [33] }
@@ -96,7 +96,7 @@ const RealisationsBanner = () => {
     <div 
       className="relative h-[30vh] max-h-[300px] w-full flex items-center justify-center"
       style={{
-        backgroundImage: 'linear-gradient(to right, rgba(30, 58, 138, 1), rgba(37, 99, 235, 1))',
+        backgroundImage: 'linear-gradient(to right, rgba(75, 85, 99, 1), rgba(107, 114, 128, 1))',
         boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
       }}
     >
@@ -139,7 +139,7 @@ const RealisationImage = ({ slide, category }: { slide: number | string, categor
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <div className="absolute bottom-0 left-0 p-5">
             <h3 className="text-white font-semibold text-base sm:text-lg">{category}</h3>
-            <p className="text-blue-300 text-xs sm:text-sm mt-1 flex items-center">
+            <p className="text-gray-300 text-xs sm:text-sm mt-1 flex items-center">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
@@ -199,13 +199,13 @@ const SideNav = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.4, ease: "easeOut" }}
-        className={`bg-white rounded-lg shadow-xl overflow-hidden transition-all duration-300 ${expanded ? 'w-64' : 'w-16'}`}
+        className={`bg-white rounded-lg shadow-xl overflow-hidden transition-all duration-300 border-2 border-gray-400 ${expanded ? 'w-64' : 'w-16'}`}
       >
-        <div className="flex items-center justify-between bg-blue-600 text-white p-3">
+        <div className="flex items-center justify-between bg-gray-600 text-white p-3">
           <h4 className={`font-medium ${expanded ? 'block' : 'hidden'}`}>Navigation</h4>
           <button 
             onClick={() => setExpanded(!expanded)}
-            className="p-1 rounded-full hover:bg-blue-500 transition-colors duration-200"
+            className="p-1 rounded-full hover:bg-gray-500 transition-colors duration-200"
           >
             {expanded ? (
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -235,7 +235,7 @@ const SideNav = () => {
               <a 
                 href={`#${category.id}`}
                 className={`flex items-center px-3 py-2 rounded-md text-sm font-medium transition-all duration-200
-                  ${activeCategory === category.id ? 'bg-gradient-to-r from-blue-50 to-blue-100 ' + category.textColor : 'text-gray-700'}
+                  ${activeCategory === category.id ? 'bg-gradient-to-r from-gray-50 to-gray-100 ' + category.textColor : 'text-gray-700'}
                   ${category.hoverColor} hover:${category.textColor}`}
               >
                 <span className={`w-3 h-3 rounded-full ${category.color} mr-2 flex-shrink-0`}></span>
