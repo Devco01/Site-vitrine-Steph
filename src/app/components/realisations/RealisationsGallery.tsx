@@ -226,7 +226,7 @@ const RealisationsGallery = () => {
               key={index}
               className={`px-4 py-2 rounded-full text-sm md:text-base transition-colors duration-300 ${
                 activeCategory === category 
-                  ? 'bg-blue-600 text-white' 
+                  ? 'bg-gray-600 text-white' 
                   : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
               }`}
               onClick={() => handleCategoryChange(category)}
@@ -265,7 +265,7 @@ const RealisationsGallery = () => {
                   <h3 className="text-lg font-bold text-gray-900">{item.title}</h3>
                   <p className="text-sm text-gray-600 mt-1">{item.description}</p>
                   <div className="mt-2">
-                    <span className="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">
+                    <span className="inline-block bg-gray-200 text-gray-700 text-xs px-2 py-1 rounded">
                       {item.category}
                     </span>
                   </div>

@@ -49,7 +49,7 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link 
               href="/contact" 
-              className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1"
+              className="bg-gray-600 hover:bg-gray-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1"
             >
               Demander un devis gratuit
             </Link>
@@ -67,7 +67,7 @@ export default function Home() {
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">
-            Portails aluminium <span className="text-blue-600">sur mesure</span> à Arvert et alentours
+            Portails aluminium <span className="text-gray-600">sur mesure</span> à Arvert et alentours
           </h2>
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
@@ -81,11 +81,11 @@ export default function Home() {
                 Notre expertise nous permet de vous garantir un <strong>portail de qualité</strong>, alliant esthétisme, robustesse et fonctionnalité, parfaitement adapté à votre habitation.
               </p>
               <div className="flex flex-wrap gap-3 mt-8">
-                <span className="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">Portails sur mesure</span>
-                <span className="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">Aluminium</span>
-                <span className="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">Arvert 17530</span>
-                <span className="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">Fabrication locale</span>
-                <span className="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">Charente-Maritime</span>
+                <span className="bg-gray-200 text-gray-700 text-sm font-medium px-3 py-1 rounded-full">Portails sur mesure</span>
+                <span className="bg-gray-200 text-gray-700 text-sm font-medium px-3 py-1 rounded-full">Aluminium</span>
+                <span className="bg-gray-200 text-gray-700 text-sm font-medium px-3 py-1 rounded-full">Arvert 17530</span>
+                <span className="bg-gray-200 text-gray-700 text-sm font-medium px-3 py-1 rounded-full">Fabrication locale</span>
+                <span className="bg-gray-200 text-gray-700 text-sm font-medium px-3 py-1 rounded-full">Charente-Maritime</span>
               </div>
             </div>
             <div className="relative h-96 rounded-lg overflow-hidden shadow-xl">

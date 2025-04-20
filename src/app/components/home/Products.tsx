@@ -72,7 +72,7 @@ const Products = () => {
                   >
                     <Link 
                       href={product.link}
-                      className="inline-block bg-blue-600 text-white py-1 xs:py-2 px-3 xs:px-4 rounded-md hover:bg-blue-700 transition-colors duration-200 text-xs xs:text-sm sm:text-base"
+                      className="inline-block bg-gray-600 text-white py-1 xs:py-2 px-3 xs:px-4 rounded-md hover:bg-gray-700 transition-colors duration-200 text-xs xs:text-sm sm:text-base"
                     >
                       Découvrir
                     </Link>
@@ -92,7 +92,7 @@ const Products = () => {
             >
               <Link 
                 href="/realisations" 
-                className="flex items-center justify-center px-3 xs:px-5 sm:px-6 py-2 sm:py-3 border border-transparent text-xs xs:text-sm sm:text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 md:text-lg max-w-[200px] xs:max-w-xs mx-auto"
+                className="flex items-center justify-center px-3 xs:px-5 sm:px-6 py-2 sm:py-3 border border-transparent text-xs xs:text-sm sm:text-base font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700 md:text-lg max-w-[200px] xs:max-w-xs mx-auto"
               >
                 <span>Voir toutes nos réalisations</span>
                 <svg className="ml-1 xs:ml-2 h-3 w-3 xs:h-4 xs:w-4 sm:h-5 sm:w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">

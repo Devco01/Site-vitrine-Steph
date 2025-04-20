@@ -156,7 +156,7 @@ const RealisationsSlider = () => {
                 <div className="absolute bottom-0 left-0 p-4 md:p-8 text-white z-10">
                   <h3 className="text-2xl md:text-3xl font-bold mb-2">{realisationsData[activeIndex].title}</h3>
                   <p className="text-lg md:text-xl max-w-2xl">{realisationsData[activeIndex].description}</p>
-                  <span className="inline-block bg-blue-600 px-3 py-1 rounded-full text-sm mt-4">
+                  <span className="inline-block bg-gray-600 px-3 py-1 rounded-full text-sm mt-4">
                     {realisationsData[activeIndex].category}
                   </span>
                 </div>
@@ -192,7 +192,7 @@ const RealisationsSlider = () => {
               key={index}
               onClick={() => setActiveIndex([index, index > activeIndex ? 1 : -1])}
               className={`w-3 h-3 mx-1 rounded-full transition-colors duration-200 ${
-                index === activeIndex ? 'bg-blue-600' : 'bg-gray-300 hover:bg-gray-400'
+                index === activeIndex ? 'bg-gray-600' : 'bg-gray-300 hover:bg-gray-400'
               }`}
               aria-label={`Aller à la slide ${index + 1}`}
             ></button>

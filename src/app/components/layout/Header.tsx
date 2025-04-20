@@ -37,7 +37,7 @@ const Header = () => {
   ];
 
   return (
-    <header className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? 'bg-gradient-to-r from-blue-700 to-blue-600 shadow-md py-2' : 'bg-gradient-to-r from-blue-800 to-blue-600 py-3'}`}>
+    <header className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? 'bg-gradient-to-r from-gray-700 to-gray-600 shadow-md py-2' : 'bg-gradient-to-r from-gray-800 to-gray-600 py-3'}`}>
       <div className="container mx-auto px-2 sm:px-4">
         <div className="flex justify-between items-center">
           <motion.div 
@@ -60,7 +60,7 @@ const Header = () => {
               </div>
               <div className="leading-tight">
                 <span className="text-xs xs:text-sm sm:text-base md:text-xl font-bold text-white truncate max-w-[140px] xs:max-w-[180px] sm:max-w-none">Stéphane Bernard</span>
-                <span className="block text-xxs xs:text-xs sm:text-sm text-blue-100 truncate max-w-[140px] xs:max-w-[180px] sm:max-w-none">Portails sur mesure</span>
+                <span className="block text-xxs xs:text-xs sm:text-sm text-gray-100 truncate max-w-[140px] xs:max-w-[180px] sm:max-w-none">Portails sur mesure</span>
               </div>
             </Link>
           </motion.div>
@@ -80,7 +80,7 @@ const Header = () => {
                   className={`relative px-3 py-2 rounded-md text-base font-medium transition-colors duration-300 ${
                     pathname === item.path 
                       ? 'text-white' 
-                      : 'text-blue-100 hover:text-white'
+                      : 'text-gray-100 hover:text-white'
                   }`}
                 >
                   {item.name}
@@ -99,7 +99,7 @@ const Header = () => {
 
           {/* Bouton de menu mobile */}
           <motion.button
-            className="md:hidden text-white focus:outline-none p-2 rounded-md hover:bg-blue-700 transition-colors duration-200"
+            className="md:hidden text-white focus:outline-none p-2 rounded-md hover:bg-gray-700 transition-colors duration-200"
             onClick={toggleMobileMenu}
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -152,8 +152,8 @@ const Header = () => {
                     href={item.path} 
                     className={`block px-4 py-2 rounded-md transition-colors duration-200 ${
                       pathname === item.path
-                        ? 'bg-blue-700 text-white font-medium'
-                        : 'text-blue-100 hover:bg-blue-700 hover:text-white'
+                        ? 'bg-gray-700 text-white font-medium'
+                        : 'text-gray-100 hover:bg-gray-700 hover:text-white'
                     }`}
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
