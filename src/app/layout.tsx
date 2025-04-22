@@ -43,7 +43,13 @@ export const metadata: Metadata = {
     images: ["https://stephane-bernard.com/Logo.png"],
   },
   icons: {
-    icon: '/favicon.ico',
+    icon: '/Logo.png',
+    shortcut: '/Logo.png',
+    apple: '/Logo.png',
+    other: {
+      rel: 'apple-touch-icon',
+      url: '/Logo.png',
+    },
   },
   verification: {
     google: "à_remplacer_par_votre_code_de_vérification_google",
@@ -59,6 +65,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr">
+      <head>
+        <link rel="icon" href="/Logo.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/Logo.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/Logo.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/Logo.png" />
+        <link rel="manifest" href="/site.webmanifest" />
+        <link rel="mask-icon" href="/Logo.png" color="#5bbad5" />
+        <meta name="msapplication-TileColor" content="#da532c" />
+        <meta name="theme-color" content="#ffffff" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen bg-white`}
       >
