@@ -199,10 +199,16 @@ const SideNav = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.4, ease: "easeOut" }}
-        className={`bg-white rounded-lg shadow-xl overflow-hidden transition-all duration-300 border-2 border-gray-400 ${expanded ? 'w-64' : 'w-16'}`}
+        layout
+        className={`bg-white rounded-lg shadow-xl overflow-hidden border-2 border-gray-400 ${expanded ? 'w-64' : 'w-16'}`}
       >
         <div className="flex items-center justify-between bg-gray-600 text-white p-3">
-          <h4 className={`font-medium ${expanded ? 'block' : 'hidden'}`}>Navigation</h4>
+          <motion.h4 
+            initial={false}
+            animate={{ opacity: expanded ? 1 : 0 }}
+            className={`font-medium ${expanded ? 'block' : 'hidden'}`}>
+            Navigation
+          </motion.h4>
           <button 
             onClick={() => setExpanded(!expanded)}
             className="p-1 rounded-full hover:bg-gray-500 transition-colors duration-200"
@@ -220,15 +226,14 @@ const SideNav = () => {
         </div>
         
         <ul className={`${expanded ? 'p-3' : 'p-1'} max-h-[calc(100vh-300px)] overflow-y-auto`}>
-          {categories.map((category, index) => (
+          {categories.map((category) => (
             <motion.li 
               key={category.id} 
               className="mb-3"
-              initial={{ opacity: 0, y: 10 }}
+              initial={false}
               animate={{ opacity: 1, y: 0 }}
               transition={{ 
                 duration: 0.3, 
-                delay: 0.1 + index * 0.05,
                 ease: "easeOut"
               }}
             >
@@ -248,6 +253,7 @@ const SideNav = () => {
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: "auto" }}
                   transition={{ duration: 0.3 }}
+                  key={`submenu-${category.id}`}
                 >
                   {category.subcategories.map((sub, subIndex) => (
                     <motion.li 
@@ -256,7 +262,7 @@ const SideNav = () => {
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ 
                         duration: 0.2, 
-                        delay: 0.1 + subIndex * 0.05,
+                        delay: 0.05 * subIndex,
                         ease: "easeOut"
                       }}
                     >
