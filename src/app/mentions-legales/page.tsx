@@ -23,7 +23,7 @@ export default function MentionsLegalesPage() {
                 <ul className="list-disc pl-5 space-y-2">
                   <li><strong>Nom commercial :</strong> Stéphane Bernard Portails</li>
                   <li><strong>Statut :</strong> Entrepreneur individuel</li>
-                  <li><strong>SIRET :</strong>49982603000037</li>
+                  <li><strong>SIRET :</strong> 49982603000037</li>
                   <li><strong>Adresse :</strong> 58 rue des sauniers, 17530 Arvert, France</li>
                   <li><strong>Téléphone :</strong> 06.64.95.30.92</li>
                   <li><strong>Email :</strong> bernard.s.portails@gmail.com</li>
