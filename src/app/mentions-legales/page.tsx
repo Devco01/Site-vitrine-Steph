@@ -47,9 +47,9 @@ export default function MentionsLegalesPage() {
                   Ce site internet est hébergé par :
                 </p>
                 <ul className="list-disc pl-5 space-y-2 mt-2">
-                  <li><strong>Société :</strong> Vercel Inc.</li>
-                  <li><strong>Adresse :</strong> 340 S Lemon Ave #4133, Walnut, CA 91789, USA</li>
-                  <li><strong>Site web :</strong> <a href="https://vercel.com" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-gray-800">https://vercel.com</a></li>
+                  <li><strong>Société :</strong> OVH SAS</li>
+                  <li><strong>Adresse :</strong> 2 rue Kellermann, 59100 Roubaix, France</li>
+                  <li><strong>Site web :</strong> <a href="https://www.ovhcloud.com" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-gray-800">https://www.ovhcloud.com</a></li>
                 </ul>
               </section>
 
